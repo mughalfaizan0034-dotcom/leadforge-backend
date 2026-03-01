@@ -16,7 +16,7 @@
   .header-right{display:flex;align-items:center;gap:10px}
   .sync-badge{display:none;align-items:center;gap:6px;background:#ecfdf5;color:var(--success);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600}
   .sync-badge.show{display:flex}
-  .btn{border:none;border-radius:10px;padding:10px 20px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s}
+  .btn{border:none;border-radius:10px;padding:10px 22px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s}
   .btn-run{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.35)}
   .btn-run:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,.45)}
   .btn-run:disabled{background:#c7d2fe;box-shadow:none;cursor:not-allowed;transform:none}
@@ -32,46 +32,33 @@
   .tab{background:transparent;color:var(--gray-600);border:none;border-radius:9px;padding:8px 22px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}
   .tab.active{background:#fff;color:var(--primary);box-shadow:0 1px 6px rgba(0,0,0,.1)}
   .content{padding:20px 24px 40px}
-  .panel{display:none}
-  .panel.active{display:block}
-  /* SEARCH BAR */
-  .search-bar{background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200);margin-bottom:20px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
-  .search-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:160px}
-  .search-label{font-size:12px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.4px}
-  .search-input{padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;color:var(--gray-800);transition:border .2s,box-shadow .2s;width:100%}
-  .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
-  .search-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-  .range-val{font-weight:700;color:var(--primary)}
-  /* GRID */
+  .panel{display:none}.panel.active{display:block}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200)}
-  .card-title{font-weight:700;font-size:16px;color:var(--gray-800);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .card-title{font-weight:700;font-size:16px;color:var(--gray-800);margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .badge-req{font-size:11px;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px;font-weight:600}
   .badge-opt{font-size:11px;background:#f0fdf4;color:#166534;padding:2px 8px;border-radius:20px;font-weight:600}
   .form-group{margin-bottom:16px}
   .form-label{font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:5px;display:block}
   .form-hint{font-size:11px;color:var(--gray-400);margin-bottom:8px;line-height:1.6}
   .input-wrap{position:relative}
-  .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;transition:border .2s;color:var(--gray-800)}
+  .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;transition:border .2s,box-shadow .2s;color:var(--gray-800)}
   .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+  .form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
   .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--gray-400)}
-  /* PLATFORM CARDS */
-  .platform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px}
-  .platform-card{border:2px solid var(--gray-200);border-radius:12px;padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s;background:var(--gray-50)}
-  .platform-card.active{border-color:var(--primary);background:var(--primary-light)}
-  .platform-card.locked{border-color:#10b981;background:#ecfdf5;cursor:default}
-  .platform-card-icon{font-size:24px;margin-bottom:4px}
-  .platform-card-name{font-size:12px;font-weight:700;color:var(--gray-600)}
-  .platform-card.active .platform-card-name{color:var(--primary)}
-  .platform-card.locked .platform-card-name{color:#10b981}
-  .platform-lock{font-size:10px;color:#10b981;font-weight:600;margin-top:2px}
-  /* STATS */
+  input[type=range]{width:100%;accent-color:var(--primary);cursor:pointer}
+  .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-400);margin-top:2px}
+  /* flow */
+  .how-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .flow-step{display:flex;align-items:center;gap:7px;background:var(--primary-light);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;color:var(--primary-dark)}
+  .flow-arrow{color:var(--gray-400);font-size:16px;font-weight:700}
+  /* stats */
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
   .stat-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200)}
   .stat-icon{font-size:26px;margin-bottom:6px}
   .stat-value{font-size:24px;font-weight:800}
   .stat-label{font-size:12px;color:var(--gray-400);font-weight:600;margin-top:2px}
-  /* TABLE */
+  /* table */
   .table-wrap{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200);overflow:hidden}
   .table-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
   .table-title{font-weight:700;font-size:15px;color:var(--gray-800);margin-bottom:10px}
@@ -82,41 +69,31 @@
   .table-scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse}
   th{padding:12px 16px;text-align:left;font-size:12px;font-weight:700;color:var(--gray-600);background:var(--gray-50);border-bottom:1px solid var(--gray-200);white-space:nowrap}
-  td{padding:13px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-600);vertical-align:top}
+  td{padding:13px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-600)}
   tr:last-child td{border-bottom:none}
   tr:hover td{background:var(--gray-50)}
   .td-name{font-weight:700;color:var(--gray-800);font-size:14px}
   .td-link{color:var(--primary);text-decoration:none;font-weight:500}
   .td-link:hover{text-decoration:underline}
-  .td-empty{color:var(--gray-200)}
-  .email-chip{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 8px;font-size:11px;margin:2px 2px 2px 0;font-weight:500}
+  .td-empty{color:#d1d5db}
   .score-badge{border-radius:20px;padding:3px 10px;font-weight:700;font-size:13px}
   .score-high{background:#ecfdf5;color:#10b981}
   .score-mid{background:#fffbeb;color:#f59e0b}
   .score-low{background:#fef2f2;color:#ef4444}
-  .platform-badge{border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600}
-  .p-google{background:#e8f5e9;color:#2e7d32}
-  .p-linkedin{background:#e3f2fd;color:#1565c0}
-  .p-instagram{background:#fce4ec;color:#880e4f}
-  .p-facebook{background:#e8eaf6;color:#283593}
-  /* LOG */
-  .log-box{background:var(--gray-50);border-radius:12px;padding:16px;height:440px;overflow-y:auto;border:1px solid var(--gray-200);font-family:monospace;font-size:13px;line-height:1.8}
-  .log-ok{color:#10b981}
-  .log-err{color:#ef4444}
-  .log-info{color:#6366f1}
-  .log-warn{color:#f59e0b}
-  .log-gray{color:var(--gray-400)}
+  /* log */
+  .log-box{background:var(--gray-50);border-radius:12px;padding:16px;height:460px;overflow-y:auto;border:1px solid var(--gray-200);font-family:monospace;font-size:13px;line-height:1.8}
+  .log-ok{color:#10b981}.log-err{color:#ef4444}.log-info{color:#6366f1}.log-gray{color:var(--gray-400)}
+  /* empty */
   .empty-state{text-align:center;padding:60px 20px}
   .empty-icon{font-size:52px;margin-bottom:12px}
   .empty-title{font-size:18px;font-weight:700;color:var(--gray-800);margin-bottom:6px}
   .empty-sub{font-size:14px;color:var(--gray-400)}
-  .history-list{display:flex;flex-direction:column;gap:10px}
-  .history-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
-  .history-meta{font-size:12px;color:var(--gray-400);margin-top:2px}
+  /* history */
+  .history-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .history-count{font-size:22px;font-weight:800;color:var(--primary)}
   .spinner{width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
   @keyframes spin{to{transform:rotate(360deg)}}
-  @media(max-width:768px){.grid-2{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.header{padding:0 16px}.content{padding:16px 16px 40px}.tabs-wrap{padding:16px 16px 0}.platform-grid{grid-template-columns:repeat(2,1fr)}.search-bar{flex-direction:column}}
+  @media(max-width:768px){.grid-2{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.header{padding:0 16px}.content,.tabs-wrap{padding-left:16px;padding-right:16px}.how-flow .flow-arrow{display:none}}
 </style>
 </head>
 <body>
@@ -137,14 +114,11 @@
 </div>
 
 <div class="progress-bar-wrap" id="progressWrap">
-  <div class="progress-top">
-    <span id="progressLabel">Starting...</span>
-    <span id="progressPct">0%</span>
-  </div>
+  <div class="progress-top"><span id="progressLabel">Starting...</span><span id="progressPct">0%</span></div>
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 </div>
 
-<div class="tabs-wrap">
+<div class="tabs-wrap" style="padding-top:20px">
   <div class="tabs">
     <button class="tab active" id="tab-config" onclick="showTab('config',this)">⚙️ Configure</button>
     <button class="tab" id="tab-logs" onclick="showTab('logs',this)">📋 Activity Log</button>
@@ -158,97 +132,87 @@
   <!-- CONFIG -->
   <div class="panel active" id="panel-config">
 
-    <!-- SEARCH FILTERS (TOP) -->
-    <div class="search-bar">
-      <div class="search-field" style="flex:2;min-width:200px">
-        <label class="search-label">🔍 Search Keyword</label>
-        <input class="search-input" type="text" id="keyword" placeholder="e.g. ecommerce store, clothing brand, online shop" value="ecommerce store"/>
-      </div>
-      <div class="search-field">
-        <label class="search-label">📍 Location</label>
-        <input class="search-input" type="text" id="location" placeholder="e.g. New York, USA"/>
-      </div>
-      <div class="search-field">
-        <label class="search-label">📊 Business Size</label>
-        <select class="search-input search-select" id="bizSize">
-          <option value="">Any Size</option>
-          <option>Startup (1-10)</option>
-          <option>Small (11-50)</option>
-          <option>Medium (51-200)</option>
-          <option>Large (200+)</option>
-        </select>
-      </div>
-      <div class="search-field" style="max-width:160px">
-        <label class="search-label">🎯 Leads: <span class="range-val" id="leadCountVal">50</span></label>
-        <input type="range" min="1" max="500" value="50" id="leadCount" style="width:100%;accent-color:var(--primary);margin-top:8px" oninput="document.getElementById('leadCountVal').textContent=this.value"/>
-      </div>
-    </div>
-
-    <!-- PLATFORM INFO -->
-    <div class="card" style="margin-bottom:20px">
-      <div class="card-title">🔗 Data Sources <span style="font-size:12px;color:var(--gray-400);font-weight:400">— Google Maps is the primary source. All other platforms are cross-referenced automatically.</span></div>
-      <div class="platform-grid">
-        <div class="platform-card locked">
-          <div class="platform-card-icon">🗺️</div>
-          <div class="platform-card-name">Google Maps</div>
-          <div class="platform-lock">Primary ✓ Always On</div>
-        </div>
-        <div class="platform-card active" id="pc-linkedin" onclick="togglePlatform('linkedin',this)">
-          <div class="platform-card-icon">💼</div>
-          <div class="platform-card-name">LinkedIn</div>
-          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
-        </div>
-        <div class="platform-card active" id="pc-instagram" onclick="togglePlatform('instagram',this)">
-          <div class="platform-card-icon">📸</div>
-          <div class="platform-card-name">Instagram</div>
-          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
-        </div>
-        <div class="platform-card active" id="pc-facebook" onclick="togglePlatform('facebook',this)">
-          <div class="platform-card-icon">👍</div>
-          <div class="platform-card-name">Facebook</div>
-          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
-        </div>
-      </div>
-      <div style="margin-top:14px;padding:12px 14px;background:#fffbeb;border-radius:10px;border:1px solid #fde68a;font-size:12px;color:#92400e">
-        ⚡ <strong>How it works:</strong> Scrapes businesses from Google Maps → finds their LinkedIn/Instagram/Facebook profiles → enriches with decision-maker emails via Hunter.io → pushes all data to Google Sheets in one row per business.
+    <!-- How it works -->
+    <div class="card" style="margin-bottom:20px;padding:18px 24px">
+      <div style="font-weight:700;font-size:14px;color:var(--primary-dark);margin-bottom:12px">⚡ How it works</div>
+      <div class="how-flow">
+        <div class="flow-step"><span>🗺️</span>Scrapes Google Maps</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span>🔗</span>Finds LinkedIn / Instagram / Facebook</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span>📧</span>Finds Decision-Maker Emails via Hunter.io</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span>📄</span>Pushes to Google Sheets</div>
       </div>
     </div>
 
     <div class="grid-2">
-      <div style="display:flex;flex-direction:column;gap:20px">
 
-        <div class="card">
-          <div class="card-title">🔑 Apify API Token <span class="badge-req">Required</span></div>
-          <div class="form-hint">Get from <a href="https://console.apify.com/account/integrations" target="_blank" style="color:var(--primary)">console.apify.com → Settings → Integrations</a><br/>Type <strong style="color:var(--primary)">demo</strong> to test with sample data.<br/>✅ Backend: <strong style="color:#10b981">leadforge-backend-81md.onrender.com</strong></div>
+      <!-- LEFT: Filters -->
+      <div class="card">
+        <div class="card-title">🎯 Lead Filters</div>
+
+        <div class="form-group">
+          <label class="form-label">Number of Leads: <strong style="color:var(--primary)" id="leadCountVal">50</strong></label>
+          <input type="range" min="1" max="500" value="50" id="leadCount" oninput="document.getElementById('leadCountVal').textContent=this.value"/>
+          <div class="range-labels"><span>1</span><span>500</span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Search Keyword</label>
+          <input class="form-input" type="text" id="keyword" placeholder="e.g. ecommerce store, clothing brand" value="ecommerce store"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Target Location</label>
+          <input class="form-input" type="text" id="location" placeholder="e.g. New York, USA — leave empty for global"/>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Business Size</label>
+          <select class="form-input form-select" id="bizSize">
+            <option value="">Any Size</option>
+            <option>Startup (1–10)</option>
+            <option>Small (11–50)</option>
+            <option>Medium (51–200)</option>
+            <option>Large (200+)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- RIGHT: API Keys -->
+      <div class="card">
+        <div class="card-title">🔑 API Keys</div>
+
+        <div class="form-group">
+          <label class="form-label">Apify Token <span class="badge-req">Required</span></label>
+          <div class="form-hint">
+            Get from <a href="https://console.apify.com/account/integrations" target="_blank" style="color:var(--primary)">console.apify.com → Integrations</a><br/>
+            ✅ Backend: <strong style="color:#10b981">leadforge-backend-81md.onrender.com</strong><br/>
+            Type <strong style="color:var(--primary)">demo</strong> to test with sample data
+          </div>
           <div class="input-wrap">
             <input class="form-input" type="password" id="apifyToken" placeholder="apify_api_xxxxxxxxxxxx  or  demo"/>
             <button class="eye-btn" onclick="toggleEye('apifyToken',this)">👁️</button>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title">📧 Hunter.io API Key <span class="badge-opt">Optional</span></div>
-          <div class="form-hint">Finds decision-maker emails for each business. Only verified, role-based emails like <code style="color:var(--primary)">name@domain.com</code> or <code style="color:var(--primary)">info@domain.com</code> are kept. Support/noreply emails are auto-skipped.</div>
+        <div class="form-group">
+          <label class="form-label">Hunter.io API Key <span class="badge-opt">Optional</span></label>
+          <div class="form-hint">Finds & verifies decision-maker emails · <a href="https://hunter.io" target="_blank" style="color:var(--primary)">hunter.io</a> · Free: 25 searches/month</div>
           <div class="input-wrap">
             <input class="form-input" type="password" id="hunterKey" placeholder="your-hunter-api-key"/>
             <button class="eye-btn" onclick="toggleEye('hunterKey',this)">👁️</button>
           </div>
         </div>
 
-      </div>
-
-      <div class="card">
-        <div class="card-title">📄 Google Sheets Webhook <span class="badge-req">Required</span></div>
-        <div class="form-hint">Your Apps Script Web App URL. Each business gets one row with all social profiles and all verified emails.</div>
-        <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom:20px"/>
-
-        <div style="background:var(--gray-50);border-radius:12px;padding:16px;border:1px solid var(--gray-200)">
-          <div style="font-weight:700;font-size:13px;color:var(--gray-800);margin-bottom:10px">📋 Sheet Columns (auto-populated)</div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px">
-            ${["Business Name","Website","Phone","Location","Google Maps URL","LinkedIn URL","Instagram URL","Facebook URL","Emails (verified)","Lead Score","Date Added"].map((c,i)=>`<div style="font-size:12px;color:var(--gray-600);display:flex;gap:6px;align-items:center"><span style="background:var(--primary-light);color:var(--primary);border-radius:4px;padding:1px 6px;font-weight:700;font-size:10px">${i+1}</span>${c}</div>`).join('')}
-          </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="form-label">Google Sheets Webhook <span class="badge-req">Required</span></label>
+          <div class="form-hint">Apps Script Web App URL — leads push here after every run</div>
+          <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -273,17 +237,22 @@
         <div class="table-header">
           <div class="table-title">🏆 Generated Leads</div>
           <div class="table-controls">
-            <div id="platformFilters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+            <div id="emailFilter" style="display:flex;gap:6px;flex-wrap:wrap"></div>
             <select class="sort-select" id="sortSelect" onchange="renderTable()">
               <option value="score">Sort: Lead Score</option>
               <option value="name">Sort: Name A–Z</option>
-              <option value="emails">Sort: Has Email First</option>
             </select>
           </div>
         </div>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>#</th><th>Business Name</th><th>Website</th><th>Emails</th><th>Phone</th><th>Location</th><th>Socials</th><th>Score</th></tr></thead>
+            <thead>
+              <tr>
+                <th>#</th><th>Business Name</th><th>Website</th>
+                <th>Decision-Maker Email</th><th>Phone</th><th>Location</th>
+                <th>LinkedIn</th><th>Instagram</th><th>Facebook</th><th>Score</th>
+              </tr>
+            </thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
@@ -295,13 +264,7 @@
   <div class="panel" id="panel-history">
     <div class="card">
       <div class="card-title">🕓 Run History</div>
-      <div id="historyList">
-        <div class="empty-state" style="padding:40px 20px">
-          <div class="empty-icon">🕓</div>
-          <div class="empty-title">No runs yet</div>
-          <div class="empty-sub">Your run history will appear here</div>
-        </div>
-      </div>
+      <div id="historyList"></div>
     </div>
   </div>
 
@@ -309,323 +272,357 @@
 
 <script>
 const BACKEND = "https://leadforge-backend-81md.onrender.com";
-const platforms = { linkedin: true, instagram: true, facebook: true };
-let allLeads = [], activePlatformFilter = "All", running = false;
-let runHistory = JSON.parse(localStorage.getItem('lf_history') || '[]');
+let allLeads = [], running = false, emailFilter = "all";
+let runHistory = [];
+try { runHistory = JSON.parse(localStorage.getItem('lf_history') || '[]'); } catch {}
+
+// Decision-maker title keywords
+const DM_TITLES = ["ceo","founder","co-founder","owner","director","head","vp","vice president","president","chief","manager","partner","principal","cto","coo","cmo"];
+// Blacklisted email prefixes (not decision-makers)
+const BLOCKED_PREFIXES = ["info","contact","hello","support","help","admin","sales","team","office","general","enquiries","enquiry","noreply","no-reply","mail","webmaster","marketing","accounts","billing","hr","careers","jobs","press","media","feedback"];
+const BLOCKED_DOMAINS = ["example.com","test.com","fake.com","mailinator.com","tempmail.com","guerrillamail.com","yopmail.com","trashmail.com","sharklasers.com","none.com","noreply.com","no-reply.com"];
 
 const MOCK = [
-  {name:"StyleHive Store",website:"stylehive.com",emails:["contact@stylehive.com","sara@stylehive.com"],phone:"+1-555-0101",location:"New York, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/stylehive",instagramUrl:"https://instagram.com/stylehive",facebookUrl:"",score:9},
-  {name:"TechGadget Hub",website:"techgadgethub.io",emails:["hello@techgadgethub.io"],phone:"+1-555-0202",location:"Austin, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/techgadget",instagramUrl:"",facebookUrl:"https://facebook.com/techgadgethub",score:8},
-  {name:"GlowUp Cosmetics",website:"glowupco.com",emails:["info@glowupco.com","ceo@glowupco.com"],phone:"+1-555-0303",location:"Los Angeles, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"",instagramUrl:"https://instagram.com/glowupco",facebookUrl:"https://facebook.com/glowupco",score:10},
-  {name:"NestCraft Furniture",website:"nestcraft.co",emails:["sales@nestcraft.co"],phone:"+44-555-0404",location:"London, UK",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/nestcraft",instagramUrl:"https://instagram.com/nestcraft",facebookUrl:"",score:7},
-  {name:"FreshBasket Foods",website:"freshbasket.com",emails:["orders@freshbasket.com","mark@freshbasket.com"],phone:"+1-555-0505",location:"Chicago, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"",instagramUrl:"https://instagram.com/freshbasket",facebookUrl:"https://facebook.com/freshbasket",score:8},
+  {name:"StyleHive Store",website:"stylehive.com",email:"james.miller@stylehive.com",phone:"+1-555-0101",location:"New York, USA",linkedin:"linkedin.com/company/stylehive",instagram:"instagram.com/stylehive",facebook:"facebook.com/stylehive",score:9},
+  {name:"TechGadget Hub",website:"techgadgethub.io",email:"sarah.jones@techgadgethub.io",phone:"+1-555-0202",location:"Austin, USA",linkedin:"linkedin.com/company/techgadgethub",instagram:"",facebook:"facebook.com/techgadgethub",score:8},
+  {name:"GlowUp Cosmetics",website:"glowupco.com",email:"anna.chen@glowupco.com",phone:"+1-555-0303",location:"Los Angeles, USA",linkedin:"linkedin.com/company/glowup",instagram:"instagram.com/glowupco",facebook:"",score:10},
+  {name:"NestCraft Furniture",website:"nestcraft.co",email:"",phone:"+44-555-0404",location:"London, UK",linkedin:"linkedin.com/company/nestcraft",instagram:"instagram.com/nestcraft",facebook:"facebook.com/nestcraft",score:6},
+  {name:"FreshBasket Foods",website:"freshbasket.com",email:"david.smith@freshbasket.com",phone:"+1-555-0505",location:"Chicago, USA",linkedin:"",instagram:"instagram.com/freshbasket",facebook:"facebook.com/freshbasket",score:8},
+  {name:"ProSport Gear",website:"prosportgear.net",email:"mike.taylor@prosportgear.net",phone:"+1-555-0606",location:"Miami, USA",linkedin:"linkedin.com/company/prosportgear",instagram:"instagram.com/prosportgear",facebook:"",score:9},
 ];
 
 window.onload = () => { renderHistory(); };
 
-function showTab(id,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
   btn.classList.add('active');
 }
-function toggleEye(id,btn){
-  const el=document.getElementById(id);
-  el.type=el.type==='password'?'text':'password';
-  btn.textContent=el.type==='password'?'👁️':'🙈';
+function toggleEye(id, btn) {
+  const el = document.getElementById(id);
+  el.type = el.type === 'password' ? 'text' : 'password';
+  btn.textContent = el.type === 'password' ? '👁️' : '🙈';
 }
-function togglePlatform(key,el){
-  platforms[key]=!platforms[key];
-  el.classList.toggle('active',platforms[key]);
-  const sub=el.querySelector('div:last-child');
-  sub.style.color=platforms[key]?'var(--primary)':'var(--gray-400)';
-  sub.textContent=platforms[key]?'Cross-reference ✓':'Disabled';
+function setProgress(pct, label) {
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  if (label) document.getElementById('progressLabel').textContent = label;
 }
-function setProgress(pct,label){
-  document.getElementById('progressFill').style.width=pct+'%';
-  document.getElementById('progressPct').textContent=pct+'%';
-  if(label) document.getElementById('progressLabel').textContent=label;
-}
-const logBox=document.getElementById('logBox');
-function addLog(msg){
-  const div=document.createElement('div');
-  div.className='log-'+(msg.includes('✅')||msg.includes('✓')?'ok':msg.includes('❌')?'err':msg.includes('⚠️')?'warn':msg.match(/[🔍📡🚀⚡🎯📊]/)?'info':'gray');
-  div.textContent=msg;
+const logBox = document.getElementById('logBox');
+function addLog(msg) {
+  const div = document.createElement('div');
+  div.className = 'log-' + (msg.includes('✅') || msg.includes('✓') ? 'ok' : msg.includes('❌') ? 'err' : msg.match(/[🔍📡🚀⚡🎯📊📧🔗]/) ? 'info' : 'gray');
+  div.textContent = msg;
   logBox.appendChild(div);
-  logBox.scrollTop=logBox.scrollHeight;
+  logBox.scrollTop = logBox.scrollHeight;
 }
-function clearLog(){logBox.innerHTML='';}
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function clearLog() { logBox.innerHTML = ''; }
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-function calcScore(lead){
-  let s=4;
-  if(lead.website) s+=1;
-  if(lead.emails&&lead.emails.length>0) s+=2;
-  if(lead.phone) s+=1;
-  if(lead.linkedinUrl) s+=1;
-  if(lead.instagramUrl||lead.facebookUrl) s+=1;
-  return Math.min(s,10);
-}
-
-async function callBackend(endpoint,body){
-  const res=await fetch(BACKEND+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const data=await res.json();
-  if(!data.success) throw new Error(data.error||'Backend error');
+async function callBackend(endpoint, body) {
+  const res = await fetch(BACKEND + endpoint, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.error || 'Backend error');
   return data;
 }
 
-async function generateLeads(){
-  if(running) return;
-  const token=document.getElementById('apifyToken').value.trim();
-  const webhook=document.getElementById('webhookUrl').value.trim();
-  const hunterKey=document.getElementById('hunterKey').value.trim();
-  const keyword=document.getElementById('keyword').value.trim()||'ecommerce store';
-  const location=document.getElementById('location').value.trim();
-  const limit=parseInt(document.getElementById('leadCount').value);
-  const isDemo=!token||token==='demo'||token.length<10;
+function isValidEmail(email) {
+  if (!email || typeof email !== 'string') return false;
+  const clean = email.trim().toLowerCase();
+  if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(clean)) return false;
+  const domain = clean.split('@')[1];
+  if (BLOCKED_DOMAINS.includes(domain)) return false;
+  return true;
+}
 
-  if(!webhook){alert('Please enter your Google Sheets Webhook URL.');return;}
+function isDecisionMakerEmail(emailObj) {
+  // emailObj from Hunter has: value, type, first_name, last_name, position, confidence
+  if (!emailObj || !isValidEmail(emailObj.value)) return false;
+  const prefix = emailObj.value.split('@')[0].toLowerCase();
+  // reject generic prefixes
+  if (BLOCKED_PREFIXES.some(b => prefix === b || prefix.startsWith(b + '.'))) return false;
+  // boost if has a personal name pattern (firstname.lastname or firstname)
+  const hasName = /^[a-z]+[\.\-_][a-z]+/.test(prefix) || /^[a-z]{3,}$/.test(prefix);
+  // check title/position if available
+  const pos = (emailObj.position || emailObj.type || '').toLowerCase();
+  const isDM = DM_TITLES.some(t => pos.includes(t));
+  // accept if it looks personal and has decent confidence, or explicitly a DM title
+  return (hasName && (emailObj.confidence || 0) >= 50) || isDM;
+}
 
-  running=true; allLeads=[]; clearLog();
+function calcScore(website, email, phone, linkedin, instagram, facebook) {
+  let s = 4;
+  if (website) s += 1;
+  if (email) s += 2;
+  if (phone) s += 1;
+  if (linkedin || instagram || facebook) s += 2;
+  return Math.min(s, 10);
+}
+
+async function generateLeads() {
+  if (running) return;
+  const token = document.getElementById('apifyToken').value.trim();
+  const webhook = document.getElementById('webhookUrl').value.trim();
+  const hunterKey = document.getElementById('hunterKey').value.trim();
+  const keyword = document.getElementById('keyword').value.trim() || 'ecommerce store';
+  const location = document.getElementById('location').value.trim();
+  const limit = parseInt(document.getElementById('leadCount').value);
+  const bizSize = document.getElementById('bizSize').value;
+  const isDemo = !token || token === 'demo' || token.length < 10;
+
+  if (!webhook) { alert('Please enter your Google Sheets Webhook URL.'); return; }
+
+  running = true; allLeads = []; clearLog();
   document.getElementById('progressWrap').classList.add('show');
   document.getElementById('syncBadge').classList.remove('show');
-  document.getElementById('resetBtn').style.display='none';
-  document.getElementById('runBtn').disabled=true;
-  document.getElementById('runBtn').innerHTML='<span class="spinner"></span> Running...';
+  document.getElementById('resetBtn').style.display = 'none';
+  document.getElementById('runBtn').disabled = true;
+  document.getElementById('runBtn').innerHTML = '<span class="spinner"></span> Running...';
 
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-logs').classList.add('active');
   document.getElementById('panel-logs').classList.add('active');
 
-  setProgress(0,'Starting...');
+  setProgress(0, 'Starting...');
   addLog('🚀 LeadForge engine starting...');
-  await sleep(300);
-  addLog(`🎯 Keyword: "${keyword}" | Location: ${location||'Global'} | Target: ${limit} leads`);
-  addLog(`⚡ Mode: ${isDemo?'Demo (sample data)':'Live (Apify API)'}`);
-  await sleep(300);
-
-  let collected=[];
-
-  // STEP 1: Google Maps (primary)
-  addLog('─────────────────────────────────');
-  addLog('📡 STEP 1: Scraping Google Maps (primary source)...');
   await sleep(400);
-  try{
-    if(isDemo){
-      addLog('🔍 [Demo] Simulating Google Maps scrape...');
-      await sleep(1200);
-      collected=MOCK.map(m=>({...m,emails:[],googleMapsUrl:m.googleMapsUrl}));
-      addLog(`✅ Google Maps — ${collected.length} businesses found`);
-    }else{
-      addLog('🔍 Running Google Maps Actor on Apify...');
-      const d=await callBackend('/scrape/google-maps',{keyword,location,limit,token});
-      collected=(d.leads||[]).map(i=>({
-        name:i.name||'',website:i.website||'',emails:[],
-        phone:i.phone||'',location:i.location||'',
-        googleMapsUrl:i.googleMapsUrl||'',
-        linkedinUrl:'',instagramUrl:'',facebookUrl:'',score:0
-      }));
-      addLog(`✅ Google Maps — ${collected.length} businesses found`);
-    }
-  }catch(err){ addLog(`❌ Google Maps failed: ${err.message}`); }
-
-  setProgress(20,'Cross-referencing platforms...');
-
-  // STEP 2: Cross-reference social platforms
-  const activeSocials=Object.entries(platforms).filter(([,v])=>v).map(([k])=>k);
-  if(activeSocials.length&&collected.length){
-    addLog('─────────────────────────────────');
-    addLog(`📡 STEP 2: Cross-referencing on ${activeSocials.join(', ')}...`);
-    await sleep(300);
-    for(const plat of activeSocials){
-      const labels={linkedin:'💼 LinkedIn',instagram:'📸 Instagram',facebook:'👍 Facebook'};
-      const endpoints={linkedin:'/scrape/linkedin',instagram:'/scrape/instagram',facebook:'/scrape/facebook'};
-      addLog(`🔍 Searching ${labels[plat]} for ${collected.length} businesses...`);
-      await sleep(400);
-      try{
-        if(isDemo){
-          await sleep(800);
-          collected.forEach((b,i)=>{
-            if(plat==='linkedin'&&MOCK[i]?.linkedinUrl) b.linkedinUrl=MOCK[i].linkedinUrl;
-            if(plat==='instagram'&&MOCK[i]?.instagramUrl) b.instagramUrl=MOCK[i].instagramUrl;
-            if(plat==='facebook'&&MOCK[i]?.facebookUrl) b.facebookUrl=MOCK[i].facebookUrl;
-          });
-          addLog(`✅ ${labels[plat]} — profiles matched`);
-        }else{
-          const d=await callBackend(endpoints[plat],{keyword,location,limit,token});
-          const items=d.leads||[];
-          // match by name similarity
-          items.forEach(item=>{
-            const match=collected.find(b=>b.name&&item.name&&b.name.toLowerCase().includes(item.name.toLowerCase().split(' ')[0]));
-            if(match){
-              if(plat==='linkedin') match.linkedinUrl=item.website||item.linkedinUrl||'';
-              if(plat==='instagram') match.instagramUrl=item.website||item.instagramUrl||'';
-              if(plat==='facebook') match.facebookUrl=item.website||item.facebookUrl||'';
-            }
-          });
-          addLog(`✅ ${labels[plat]} — ${items.length} profiles found & matched`);
-        }
-      }catch(err){ addLog(`⚠️ ${labels[plat]} skipped: ${err.message}`); }
-    }
-  }
-
-  setProgress(55,'Finding decision-maker emails...');
-
-  // STEP 3: Email enrichment
-  addLog('─────────────────────────────────');
-  addLog('📡 STEP 3: Finding decision-maker emails via Hunter.io...');
+  addLog(`🎯 Target: ${limit} leads | "${keyword}" | ${location || 'Global'}${bizSize ? ' | ' + bizSize : ''}`);
+  addLog(`⚡ Mode: ${isDemo ? 'Demo (sample data)' : 'Live (Apify)'}`);
   await sleep(300);
-  if(!hunterKey&&!isDemo){
-    addLog('⚠️ No Hunter.io key provided — skipping email enrichment');
-  }else{
-    try{
-      if(isDemo){
-        await sleep(800);
-        collected.forEach((b,i)=>{ if(MOCK[i]?.emails) b.emails=MOCK[i].emails; });
-        addLog(`✅ Email enrichment done — ${collected.filter(b=>b.emails.length>0).length}/${collected.length} businesses have emails`);
-      }else{
-        const d=await callBackend('/enrich/emails',{leads:collected,hunterApiKey:hunterKey});
-        if(d.leads) d.leads.forEach((l,i)=>{ collected[i].emails=l.emails||[]; });
-        const withEmail=collected.filter(b=>b.emails.length>0).length;
-        addLog(`✅ Email enrichment done — ${withEmail}/${collected.length} businesses have verified emails`);
-        addLog(`📧 Total decision-maker emails found: ${collected.reduce((a,b)=>a+b.emails.length,0)}`);
-      }
-    }catch(err){ addLog(`⚠️ Email enrichment failed: ${err.message}`); }
+
+  let leads = [];
+
+  // ── STEP 1: Google Maps ──
+  setProgress(5, 'Scraping Google Maps...');
+  addLog('🗺️ Step 1: Scraping Google Maps...');
+  await sleep(400);
+  try {
+    if (isDemo) {
+      await sleep(1200);
+      leads = JSON.parse(JSON.stringify(MOCK)).slice(0, limit);
+      addLog(`✅ Google Maps — ${leads.length} businesses found`);
+    } else {
+      addLog('🔍 Running Google Maps actor on Apify cloud... (30–90s)');
+      const d = await callBackend('/scrape/google-maps', { keyword, location, limit, token });
+      leads = (d.leads || []).slice(0, limit);
+      addLog(`✅ Google Maps — ${leads.length} businesses scraped`);
+    }
+  } catch (err) {
+    addLog(`❌ Google Maps failed: ${err.message}`);
   }
 
-  // Score all leads
-  collected.forEach(b=>{ b.score=calcScore(b); });
+  if (!leads.length) {
+    addLog('❌ No leads found. Check your keyword or Apify token.');
+    finishRun([], isDemo, webhook, hunterKey);
+    return;
+  }
 
-  // Dedup
-  const seen=new Set();
-  const unique=collected.filter(l=>{const k=(l.name+l.website).toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,limit);
-  addLog(`📊 Final: ${unique.length} unique businesses ready`);
-  setProgress(80,'Pushing to Google Sheets...');
+  setProgress(25, 'Finding social profiles...');
 
-  // STEP 4: Push to Sheets
-  addLog('─────────────────────────────────');
-  addLog(`📡 STEP 4: Pushing ${unique.length} leads to Google Sheets...`);
-  await sleep(500);
-  let pushed=false;
-  try{
-    if(isDemo){ await sleep(700); pushed=true; }
-    else{
-      const d=await callBackend('/push/sheets',{webhookUrl:webhook,leads:unique});
-      pushed=d.success;
-      if(pushed) addLog(`📧 Leads with emails: ${d.withEmail||0}/${unique.length}`);
+  // ── STEP 2: Social profile enrichment per business ──
+  addLog(`🔗 Step 2: Finding social profiles for ${leads.length} businesses...`);
+  await sleep(400);
+  if (!isDemo) {
+    try {
+      const d = await callBackend('/enrich/social', { leads, token });
+      if (d.leads) {
+        d.leads.forEach((l, i) => { leads[i] = { ...leads[i], ...l }; });
+        addLog(`✅ Social profiles enriched`);
+      }
+    } catch (err) {
+      addLog(`⚠️ Social enrichment failed: ${err.message}`);
     }
-    if(pushed){
-      addLog(`✅ All ${unique.length} leads pushed to Google Sheets!`);
-      document.getElementById('syncBadge').classList.add('show');
-      document.getElementById('syncCount').textContent=unique.length;
-    }else{ addLog('❌ Google Sheets push failed — check webhook URL'); }
-  }catch(err){ addLog(`❌ Sheets error: ${err.message}`); }
+  } else {
+    await sleep(900);
+    addLog(`✅ Social profiles found (demo)`);
+  }
 
-  setProgress(100,'Done! ✅');
-  allLeads=unique;
+  setProgress(55, 'Finding decision-maker emails...');
 
-  const histEntry={date:new Date().toLocaleString(),count:unique.length,keyword,location:location||'Global',platforms:'Google Maps + '+activeSocials.join(', '),avgScore:(unique.reduce((a,b)=>a+b.score,0)/(unique.length||1)).toFixed(1),emailCount:unique.reduce((a,b)=>a+b.emails.length,0),mode:isDemo?'Demo':'Live'};
-  runHistory.unshift(histEntry);
-  if(runHistory.length>20) runHistory.pop();
-  localStorage.setItem('lf_history',JSON.stringify(runHistory));
-  renderHistory();
-  renderResults(unique);
+  // ── STEP 3: Hunter.io — decision-maker emails only ──
+  addLog(`📧 Step 3: Finding decision-maker emails via Hunter.io...`);
+  await sleep(400);
+  if (hunterKey && !isDemo) {
+    let found = 0;
+    for (let i = 0; i < leads.length; i += 5) {
+      const batch = leads.slice(i, i + 5);
+      await Promise.all(batch.map(async (lead, bi) => {
+        if (!lead.website) return;
+        try {
+          const domain = lead.website.replace(/https?:\/\//, '').split('/')[0].replace(/^www\./, '');
+          const res = await fetch(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterKey}&limit=10`);
+          const data = await res.json();
+          const emails = (data?.data?.emails || []);
+          // filter for decision-makers only
+          const dmEmails = emails.filter(e => isDecisionMakerEmail(e)).sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
+          if (dmEmails.length) {
+            leads[i + bi].email = dmEmails[0].value.trim().toLowerCase();
+            leads[i + bi].emailName = `${dmEmails[0].first_name || ''} ${dmEmails[0].last_name || ''}`.trim();
+            leads[i + bi].emailTitle = dmEmails[0].position || '';
+            found++;
+          }
+        } catch {}
+      }));
+      if (i + 5 < leads.length) await sleep(1000);
+    }
+    addLog(`✅ Decision-maker emails found: ${found}/${leads.length}`);
+  } else if (isDemo) {
+    await sleep(800);
+    addLog(`✅ Decision-maker emails enriched (demo)`);
+  } else {
+    addLog(`⚠️ No Hunter.io key — skipping email enrichment`);
+  }
 
-  running=false;
-  document.getElementById('runBtn').disabled=false;
-  document.getElementById('runBtn').innerHTML='⚡ Run';
-  document.getElementById('resetBtn').style.display='flex';
+  // Recalculate scores
+  leads = leads.map(l => ({
+    ...l,
+    score: calcScore(l.website, l.email, l.phone, l.linkedin, l.instagram, l.facebook)
+  }));
 
-  await sleep(800);
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-results').classList.add('active');
-  document.getElementById('panel-results').classList.add('active');
-  document.getElementById('tab-results').textContent=`📊 Leads (${unique.length})`;
+  setProgress(80, 'Pushing to Google Sheets...');
+  await finishRun(leads, isDemo, webhook, hunterKey);
 }
 
-function resetAll(){
-  if(!confirm('Reset all leads and clear current results?')) return;
-  allLeads=[]; activePlatformFilter='All'; clearLog();
-  document.getElementById('emptyResults').style.display='block';
-  document.getElementById('resultsContent').style.display='none';
-  document.getElementById('tab-results').textContent='📊 Leads';
+async function finishRun(leads, isDemo, webhook, hunterKey) {
+  addLog(`📡 Step 4: Pushing ${leads.length} leads to Google Sheets...`);
+  await sleep(500);
+  let pushed = false;
+  try {
+    if (isDemo) { await sleep(700); pushed = true; }
+    else {
+      const d = await callBackend('/push/sheets', { webhookUrl: webhook, leads });
+      pushed = d.success;
+    }
+    if (pushed) {
+      const withEmail = leads.filter(l => l.email).length;
+      addLog(`✅ ${leads.length} leads pushed to Google Sheets!`);
+      addLog(`📧 Decision-maker emails included: ${withEmail}/${leads.length}`);
+      document.getElementById('syncBadge').classList.add('show');
+      document.getElementById('syncCount').textContent = leads.length;
+    } else {
+      addLog(`❌ Google Sheets push failed — check your webhook URL`);
+    }
+  } catch (err) { addLog(`❌ Sheets error: ${err.message}`); }
+
+  setProgress(100, 'Done!');
+  allLeads = leads;
+
+  // Save history
+  const entry = {
+    date: new Date().toLocaleString(),
+    count: leads.length,
+    withEmail: leads.filter(l => l.email).length,
+    keyword: document.getElementById('keyword').value.trim(),
+    location: document.getElementById('location').value.trim() || 'Global',
+    avgScore: leads.length ? (leads.reduce((a, b) => a + b.score, 0) / leads.length).toFixed(1) : '0',
+    mode: isDemo ? 'Demo' : 'Live'
+  };
+  runHistory.unshift(entry);
+  if (runHistory.length > 20) runHistory.pop();
+  try { localStorage.setItem('lf_history', JSON.stringify(runHistory)); } catch {}
+  renderHistory();
+  renderResults(leads);
+
+  running = false;
+  document.getElementById('runBtn').disabled = false;
+  document.getElementById('runBtn').innerHTML = '⚡ Run';
+  document.getElementById('resetBtn').style.display = 'flex';
+
+  await sleep(800);
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-results').classList.add('active');
+  document.getElementById('panel-results').classList.add('active');
+  document.getElementById('tab-results').textContent = `📊 Leads (${leads.length})`;
+}
+
+function resetAll() {
+  if (!confirm('Reset and clear current results?')) return;
+  allLeads = []; emailFilter = 'all'; clearLog();
+  document.getElementById('emptyResults').style.display = 'block';
+  document.getElementById('resultsContent').style.display = 'none';
+  document.getElementById('tab-results').textContent = '📊 Leads';
   document.getElementById('syncBadge').classList.remove('show');
   document.getElementById('progressWrap').classList.remove('show');
-  document.getElementById('resetBtn').style.display='none';
-  setProgress(0,'');
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('resetBtn').style.display = 'none';
+  setProgress(0, '');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-config').classList.add('active');
   document.getElementById('panel-config').classList.add('active');
 }
 
-function renderResults(leads){
-  if(!leads.length){document.getElementById('emptyResults').style.display='block';document.getElementById('resultsContent').style.display='none';return;}
-  document.getElementById('emptyResults').style.display='none';
-  document.getElementById('resultsContent').style.display='block';
-  const totalEmails=leads.reduce((a,b)=>a+b.emails.length,0);
-  const avg=(leads.reduce((a,b)=>a+b.score,0)/leads.length).toFixed(1);
-  document.getElementById('statsGrid').innerHTML=[
-    {icon:'👥',value:leads.length,label:'Total Leads',color:'#6366f1'},
-    {icon:'📧',value:totalEmails,label:'Verified Emails',color:'#10b981'},
-    {icon:'⭐',value:avg+'/10',label:'Avg Score',color:'#f59e0b'},
-    {icon:'📄',value:'Synced ✓',label:'Google Sheets',color:'#10b981'},
-  ].map(s=>`<div class="stat-card"><div class="stat-icon">${s.icon}</div><div class="stat-value" style="color:${s.color}">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('');
-  const pf=document.getElementById('platformFilters');
-  pf.innerHTML=['All','Has Email','No Email'].map(p=>`<button class="filter-btn ${p==='All'?'active':''}" onclick="setFilter('${p}',this)">${p}</button>`).join('');
+function renderResults(leads) {
+  if (!leads.length) { document.getElementById('emptyResults').style.display = 'block'; document.getElementById('resultsContent').style.display = 'none'; return; }
+  document.getElementById('emptyResults').style.display = 'none';
+  document.getElementById('resultsContent').style.display = 'block';
+  const withEmail = leads.filter(l => l.email).length;
+  const avg = (leads.reduce((a, b) => a + b.score, 0) / leads.length).toFixed(1);
+  document.getElementById('statsGrid').innerHTML = [
+    { icon: '👥', value: leads.length, label: 'Total Leads', color: '#6366f1' },
+    { icon: '📧', value: withEmail, label: 'Decision-Maker Emails', color: '#10b981' },
+    { icon: '⭐', value: avg + '/10', label: 'Avg Score', color: '#f59e0b' },
+    { icon: '📄', value: 'Synced ✓', label: 'Google Sheets', color: '#10b981' },
+  ].map(s => `<div class="stat-card"><div class="stat-icon">${s.icon}</div><div class="stat-value" style="color:${s.color}">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('');
+
+  document.getElementById('emailFilter').innerHTML = [
+    { key: 'all', label: `All (${leads.length})` },
+    { key: 'email', label: `With Email (${withEmail})` },
+    { key: 'noemail', label: `No Email (${leads.length - withEmail})` },
+  ].map(f => `<button class="filter-btn ${f.key === emailFilter ? 'active' : ''}" onclick="setEmailFilter('${f.key}',this)">${f.label}</button>`).join('');
+
   renderTable();
 }
 
-function setFilter(p,btn){
-  activePlatformFilter=p;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+function setEmailFilter(f, btn) {
+  emailFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderTable();
 }
 
-function renderTable(){
-  const sort=document.getElementById('sortSelect').value;
-  let leads=[...allLeads];
-  if(activePlatformFilter==='Has Email') leads=leads.filter(l=>l.emails.length>0);
-  if(activePlatformFilter==='No Email') leads=leads.filter(l=>l.emails.length===0);
-  if(sort==='score') leads.sort((a,b)=>b.score-a.score);
-  else if(sort==='name') leads.sort((a,b)=>a.name.localeCompare(b.name));
-  else if(sort==='emails') leads.sort((a,b)=>b.emails.length-a.emails.length);
-  const sc=s=>s>=9?'score-high':s>=7?'score-mid':'score-low';
-  document.getElementById('tableBody').innerHTML=leads.map((l,i)=>`
+function renderTable() {
+  const sort = document.getElementById('sortSelect').value;
+  let leads = [...allLeads].filter(l => emailFilter === 'all' ? true : emailFilter === 'email' ? !!l.email : !l.email);
+  if (sort === 'score') leads.sort((a, b) => b.score - a.score);
+  else leads.sort((a, b) => a.name.localeCompare(b.name));
+  const sc = s => s >= 9 ? 'score-high' : s >= 7 ? 'score-mid' : 'score-low';
+  document.getElementById('tableBody').innerHTML = leads.map((l, i) => `
     <tr>
-      <td class="td-empty">${i+1}</td>
-      <td class="td-name">${l.name}<br/><span style="font-size:11px;color:var(--gray-400);font-weight:400">${l.location||''}</span></td>
-      <td>${l.website?`<a class="td-link" href="https://${l.website}" target="_blank">${l.website}</a>`:'<span class="td-empty">—</span>'}</td>
-      <td>${l.emails.length?l.emails.map(e=>`<span class="email-chip">${e}</span>`).join(''):'<span class="td-empty">—</span>'}</td>
-      <td>${l.phone||'<span class="td-empty">—</span>'}</td>
-      <td>${l.location||'<span class="td-empty">—</span>'}</td>
-      <td style="white-space:nowrap">
-        ${l.linkedinUrl?`<a class="td-link" href="${l.linkedinUrl}" target="_blank">💼</a> `:''}
-        ${l.instagramUrl?`<a class="td-link" href="${l.instagramUrl}" target="_blank">📸</a> `:''}
-        ${l.facebookUrl?`<a class="td-link" href="${l.facebookUrl}" target="_blank">👍</a>`:''}
-        ${!l.linkedinUrl&&!l.instagramUrl&&!l.facebookUrl?'<span class="td-empty">—</span>':''}
-      </td>
+      <td class="td-empty">${i + 1}</td>
+      <td class="td-name">${l.name}</td>
+      <td>${l.website ? `<a class="td-link" href="https://${l.website}" target="_blank">${l.website}</a>` : '<span class="td-empty">—</span>'}</td>
+      <td>${l.email ? `<div style="color:#10b981;font-weight:600;font-size:13px">${l.email}</div>${l.emailName ? `<div style="font-size:11px;color:var(--gray-400)">${l.emailName}${l.emailTitle ? ' · ' + l.emailTitle : ''}</div>` : ''}` : '<span class="td-empty">—</span>'}</td>
+      <td>${l.phone || '<span class="td-empty">—</span>'}</td>
+      <td>${l.location || '<span class="td-empty">—</span>'}</td>
+      <td>${l.linkedin ? `<a class="td-link" href="https://${l.linkedin}" target="_blank">LinkedIn</a>` : '<span class="td-empty">—</span>'}</td>
+      <td>${l.instagram ? `<a class="td-link" href="https://${l.instagram}" target="_blank">Instagram</a>` : '<span class="td-empty">—</span>'}</td>
+      <td>${l.facebook ? `<a class="td-link" href="https://${l.facebook}" target="_blank">Facebook</a>` : '<span class="td-empty">—</span>'}</td>
       <td><span class="score-badge ${sc(l.score)}">${l.score}/10</span></td>
     </tr>`).join('');
 }
 
-function renderHistory(){
-  const el=document.getElementById('historyList');
-  if(!runHistory.length){
-    el.innerHTML=`<div class="empty-state" style="padding:40px 20px"><div class="empty-icon">🕓</div><div class="empty-title">No runs yet</div><div class="empty-sub">Your run history will appear here</div></div>`;
+function renderHistory() {
+  const el = document.getElementById('historyList');
+  if (!runHistory.length) {
+    el.innerHTML = `<div class="empty-state" style="padding:40px 20px"><div class="empty-icon">🕓</div><div class="empty-title">No runs yet</div><div class="empty-sub">Your run history will appear here</div></div>`;
     return;
   }
-  el.innerHTML=`<div class="history-list">${runHistory.map((r,i)=>`
+  el.innerHTML = runHistory.map((r, i) => `
     <div class="history-item">
       <div>
-        <div style="font-weight:700;font-size:14px;color:var(--gray-800)">Run #${runHistory.length-i} — "${r.keyword}" · ${r.location}</div>
-        <div class="history-meta">${r.date} · ${r.platforms} · Avg: ${r.avgScore}/10 · 📧 ${r.emailCount||0} emails · <span style="color:${r.mode==='Demo'?'#f59e0b':'#10b981'};font-weight:600">${r.mode}</span></div>
+        <div style="font-weight:700;font-size:14px;color:var(--gray-800)">Run #${runHistory.length - i} — "${r.keyword}" · ${r.location}</div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:3px">${r.date} · Avg score: ${r.avgScore}/10 · Emails: ${r.withEmail || 0} · <span style="color:${r.mode === 'Demo' ? '#f59e0b' : '#10b981'};font-weight:600">${r.mode}</span></div>
       </div>
-      <div style="text-align:right"><div class="history-count">${r.count}</div><div style="font-size:11px;color:var(--gray-400)">leads</div></div>
-    </div>`).join('')}</div>`;
+      <div style="text-align:right;flex-shrink:0;margin-left:16px">
+        <div class="history-count">${r.count}</div>
+        <div style="font-size:11px;color:var(--gray-400)">leads</div>
+      </div>
+    </div>`).join('');
 }
 </script>
 </body>
