@@ -482,18 +482,22 @@ async function generateLeads(){
   await sleep(400);
 
   // Hunter enrichment
-  if(actors.hunter && hunterKey && !isDemo){
-    addLog('📧 Enriching emails via Hunter.io...');
-    for(let i=0;i<unique.length;i++){
-      if(!unique[i].email && unique[i].website){
-        try{
-          const domain=unique[i].website.replace(/https?:\/\//,'').split('/')[0];
-          const d = await callBackend('/enrich/hunter',{domain, hunterApiKey: hunterKey});
-          if(d.email){unique[i].email=d.email;unique[i].score=Math.min(unique[i].score+1,10);}
-        }catch{}
+  // Always attempt email enrichment if Hunter key provided
+  if(hunterKey && !isDemo){
+    addLog(`📧 Enriching emails via Hunter.io for ${unique.length} leads...`);
+    setProgress(78,'Enriching emails...');
+    try{
+      const d = await callBackend('/enrich/emails',{leads: unique, hunterApiKey: hunterKey});
+      if(d.leads){
+        d.leads.forEach((l,i)=>{ unique[i]=l; });
+        const found = unique.filter(l=>l.email).length;
+        addLog(`✅ Email enrichment done — ${found}/${unique.length} leads have valid emails`);
       }
+    }catch(err){
+      addLog(`⚠️ Email enrichment failed: ${err.message}`);
     }
-    addLog('✅ Hunter.io enrichment complete');
+  } else if(!hunterKey && !isDemo){
+    addLog(`⚠️ No Hunter.io key — emails may be missing. Add key in config to enrich emails.`);
   }
 
   setProgress(90,'Pushing to Google Sheets...');
@@ -506,6 +510,7 @@ async function generateLeads(){
     else{
       const d = await callBackend('/push/sheets',{webhookUrl: webhook, leads: unique});
       pushed = d.success;
+      if(pushed) addLog(`📧 Leads with verified emails: ${d.withEmail||0}/${unique.length}`);
     }
     if(pushed){
       addLog(`✅ ${unique.length} leads pushed to Google Sheets!`);
