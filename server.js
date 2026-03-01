@@ -1,0 +1,116 @@
+const express = require("express");
+const cors = require("cors");
+const axios = require("axios");
+
+const app = express();
+app.use(cors({ origin: "*" }));
+app.use(express.json());
+
+const BASE = "https://api.apify.com/v2";
+
+// ── Poll until actor finishes ──
+async function waitForRun(runId, token) {
+  for (let i = 0; i < 40; i++) {
+    await new Promise(r => setTimeout(r, 3000));
+    const { data } = await axios.get(`${BASE}/actor-runs/${runId}?token=${token}`);
+    const status = data.data.status;
+    if (status === "SUCCEEDED") return data.data.defaultDatasetId;
+    if (["FAILED", "ABORTED", "TIMED-OUT"].includes(status)) throw new Error("Actor " + status);
+  }
+  throw new Error("Actor timed out");
+}
+
+// ── Fetch results ──
+async function getItems(datasetId, token, limit) {
+  const { data } = await axios.get(`${BASE}/datasets/${datasetId}/items?token=${token}&limit=${limit}`);
+  return data;
+}
+
+// ── Score ──
+function score(w, e, p) {
+  let s = 5;
+  if (w) s += 2;
+  if (e) s += 2;
+  if (p) s += 1;
+  return Math.min(s, 10);
+}
+
+// ── Health check ──
+app.get("/", (req, res) => res.json({ status: "LeadForge backend running ✅" }));
+
+// ── Google Maps ──
+app.post("/scrape/google-maps", async (req, res) => {
+  try {
+    const { keyword, location, limit, token } = req.body;
+    const { data } = await axios.post(`${BASE}/acts/nwua9Gu5YrADL7ZDj/runs?token=${token}`, {
+      searchStringsArray: [`${keyword} ${location}`],
+      maxCrawledPlacesPerSearch: parseInt(limit) || 10
+    });
+    const did = await waitForRun(data.data.id, token);
+    const items = await getItems(did, token, limit);
+    res.json({ success: true, leads: items.map(i => ({ name: i.title || i.name || "", website: i.website || "", email: i.email || "", phone: i.phone || i.phoneNumber || "", location: i.address || i.city || "", platform: "Google Maps", score: score(i.website, i.email, i.phone) })) });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+// ── LinkedIn ──
+app.post("/scrape/linkedin", async (req, res) => {
+  try {
+    const { keyword, limit, token } = req.body;
+    const { data } = await axios.post(`${BASE}/acts/2SyF0bVxmgGr8IVCZ/runs?token=${token}`, {
+      searchUrl: `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(keyword)}`,
+      maxResults: parseInt(limit) || 10
+    });
+    const did = await waitForRun(data.data.id, token);
+    const items = await getItems(did, token, limit);
+    res.json({ success: true, leads: items.map(i => ({ name: i.name || i.companyName || "", website: i.website || i.linkedInUrl || "", email: i.email || "", phone: i.phone || "", location: i.location || i.headquarter || "", platform: "LinkedIn", score: score(i.website, i.email, i.phone) })) });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+// ── Instagram ──
+app.post("/scrape/instagram", async (req, res) => {
+  try {
+    const { keyword, limit, token } = req.body;
+    const { data } = await axios.post(`${BASE}/acts/reGe1ST3OBgYZSsZJ/runs?token=${token}`, {
+      hashtags: [keyword.replace(/ /g, "")],
+      resultsLimit: parseInt(limit) || 10
+    });
+    const did = await waitForRun(data.data.id, token);
+    const items = await getItems(did, token, limit);
+    res.json({ success: true, leads: items.map(i => ({ name: i.ownerUsername || i.name || "", website: i.externalUrl || "", email: i.businessEmail || "", phone: i.businessPhoneNumber || "", location: i.city || "", platform: "Instagram", score: score(i.externalUrl, i.businessEmail, i.businessPhoneNumber) })) });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+// ── Facebook ──
+app.post("/scrape/facebook", async (req, res) => {
+  try {
+    const { keyword, limit, token } = req.body;
+    const { data } = await axios.post(`${BASE}/acts/KoJrdxJCTtpon81KY/runs?token=${token}`, {
+      startUrls: [{ url: `https://www.facebook.com/search/pages/?q=${encodeURIComponent(keyword)}` }],
+      maxResults: parseInt(limit) || 10
+    });
+    const did = await waitForRun(data.data.id, token);
+    const items = await getItems(did, token, limit);
+    res.json({ success: true, leads: items.map(i => ({ name: i.pageName || i.name || "", website: i.website || "", email: i.email || "", phone: i.phone || "", location: i.location || "", platform: "Facebook", score: score(i.website, i.email, i.phone) })) });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+// ── Hunter.io ──
+app.post("/enrich/hunter", async (req, res) => {
+  try {
+    const { domain, hunterApiKey } = req.body;
+    const { data } = await axios.get(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterApiKey}`);
+    res.json({ success: true, email: data?.data?.emails?.[0]?.value || "" });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+// ── Push to Google Sheets ──
+app.post("/push/sheets", async (req, res) => {
+  try {
+    const { webhookUrl, leads } = req.body;
+    await axios.post(webhookUrl, { leads });
+    res.json({ success: true, count: leads.length });
+  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`✅ LeadForge running on port ${PORT}`));
