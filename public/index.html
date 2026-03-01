@@ -44,6 +44,9 @@
   .input-wrap{position:relative}
   .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;transition:border .2s,box-shadow .2s;color:var(--gray-800)}
   .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+  .form-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(239,68,68,.1)!important;background:#fff5f5}
+  .field-error{font-size:11px;color:var(--danger);margin-top:4px;display:none;font-weight:600}
+  .field-error.show{display:block}
   .form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
   .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--gray-400)}
   input[type=range]{width:100%;accent-color:var(--primary);cursor:pointer}
@@ -123,7 +126,7 @@
     <button class="tab active" id="tab-config" onclick="showTab('config',this)">⚙️ Configure</button>
     <button class="tab" id="tab-logs" onclick="showTab('logs',this)">📋 Activity Log</button>
     <button class="tab" id="tab-results" onclick="showTab('results',this)">📊 Leads</button>
-    <button class="tab" id="tab-history" onclick="showTab('history',this)">🕓 History</button>
+
   </div>
 </div>
 
@@ -140,7 +143,7 @@
         <div class="flow-arrow">→</div>
         <div class="flow-step"><span>🔗</span>Finds LinkedIn / Instagram / Facebook</div>
         <div class="flow-arrow">→</div>
-        <div class="flow-step"><span>📧</span>Finds Decision-Maker Emails via Hunter.io</div>
+        <div class="flow-step"><span>📧</span>Extracts Emails from Google Maps</div>
         <div class="flow-arrow">→</div>
         <div class="flow-step"><span>📄</span>Pushes to Google Sheets</div>
       </div>
@@ -152,20 +155,27 @@
       <div class="card">
         <div class="card-title">🎯 Lead Filters</div>
 
-        <div class="form-group">
-          <label class="form-label">Number of Leads: <strong style="color:var(--primary)" id="leadCountVal">50</strong></label>
-          <input type="range" min="1" max="500" value="50" id="leadCount" oninput="document.getElementById('leadCountVal').textContent=this.value"/>
-          <div class="range-labels"><span>1</span><span>500</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <span style="font-weight:700;font-size:16px;color:var(--gray-800)">🎯 Lead Filters</span>
+          <button onclick="resetFilters()" style="background:var(--gray-100);border:1.5px solid var(--gray-200);border-radius:8px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:5px" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='var(--gray-100)'">↺ Reset Filters</button>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Search Keyword</label>
-          <input class="form-input" type="text" id="keyword" placeholder="e.g. ecommerce store, clothing brand" value="ecommerce store"/>
+          <label class="form-label">Number of Leads <span style="color:var(--danger)">*</span> <span style="font-size:11px;color:var(--gray-400);font-weight:400">(max 500)</span></label>
+          <input class="form-input" type="number" id="leadCount" min="1" max="500" placeholder="e.g. 5" oninput="if(this.value>500)this.value=500;if(this.value<1)this.value=1;clearError('leadCount')"/>
+          <div class="field-error" id="err-leadCount">Please enter number of leads</div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Target Location</label>
-          <input class="form-input" type="text" id="location" placeholder="e.g. New York, USA — leave empty for global"/>
+          <label class="form-label">Search Keyword <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="text" id="keyword" placeholder="e.g. ecommerce store, clothing brand" oninput="clearError('keyword')"/>
+          <div class="field-error" id="err-keyword">Please enter a search keyword</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Target Location <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="text" id="location" placeholder="e.g. New York, USA" oninput="clearError('location')"/>
+          <div class="field-error" id="err-location">Please enter a target location</div>
         </div>
 
         <div class="form-group" style="margin-bottom:0">
@@ -186,30 +196,19 @@
 
         <div class="form-group">
           <label class="form-label">Apify Token <span class="badge-req">Required</span></label>
-          <div class="form-hint">
-            Get from <a href="https://console.apify.com/account/integrations" target="_blank" style="color:var(--primary)">console.apify.com → Integrations</a><br/>
-            ✅ Backend: <strong style="color:#10b981">leadforge-backend-81md.onrender.com</strong><br/>
-            Type <strong style="color:var(--primary)">demo</strong> to test with sample data
-          </div>
+
           <div class="input-wrap">
             <input class="form-input" type="password" id="apifyToken" placeholder="apify_api_xxxxxxxxxxxx  or  demo"/>
             <button class="eye-btn" onclick="toggleEye('apifyToken',this)">👁️</button>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Hunter.io API Key <span class="badge-opt">Optional</span></label>
-          <div class="form-hint">Finds & verifies decision-maker emails · <a href="https://hunter.io" target="_blank" style="color:var(--primary)">hunter.io</a> · Free: 25 searches/month</div>
-          <div class="input-wrap">
-            <input class="form-input" type="password" id="hunterKey" placeholder="your-hunter-api-key"/>
-            <button class="eye-btn" onclick="toggleEye('hunterKey',this)">👁️</button>
-          </div>
-        </div>
 
         <div class="form-group" style="margin-bottom:0">
           <label class="form-label">Google Sheets Webhook <span class="badge-req">Required</span></label>
           <div class="form-hint">Apps Script Web App URL — leads push here after every run</div>
-          <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
+          <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec" oninput="clearError('webhookUrl')"/>
+          <div class="field-error" id="err-webhookUrl">Google Sheets Webhook URL is required</div>
         </div>
       </div>
 
@@ -260,13 +259,7 @@
     </div>
   </div>
 
-  <!-- HISTORY -->
-  <div class="panel" id="panel-history">
-    <div class="card">
-      <div class="card-title">🕓 Run History</div>
-      <div id="historyList"></div>
-    </div>
-  </div>
+
 
 </div>
 
@@ -274,7 +267,6 @@
 const BACKEND = "https://leadforge-backend-81md.onrender.com";
 let allLeads = [], running = false, emailFilter = "all";
 let runHistory = [];
-try { runHistory = JSON.parse(localStorage.getItem('lf_history') || '[]'); } catch {}
 
 // Decision-maker title keywords
 const DM_TITLES = ["ceo","founder","co-founder","owner","director","head","vp","vice president","president","chief","manager","partner","principal","cto","coo","cmo"];
@@ -366,12 +358,12 @@ async function generateLeads() {
   if (running) return;
   const token = document.getElementById('apifyToken').value.trim();
   const webhook = document.getElementById('webhookUrl').value.trim();
-  const hunterKey = document.getElementById('hunterKey').value.trim();
-  const keyword = document.getElementById('keyword').value.trim() || 'ecommerce store';
+
+  const keyword  = document.getElementById('keyword').value.trim();
   const location = document.getElementById('location').value.trim();
-  const limit = parseInt(document.getElementById('leadCount').value);
-  const bizSize = document.getElementById('bizSize').value;
-  const isDemo = !token || token === 'demo' || token.length < 10;
+  const limit    = parseInt(document.getElementById('leadCount').value);
+  const bizSize  = document.getElementById('bizSize').value;
+  const isDemo = false;
 
   if (!webhook) { alert('Please enter your Google Sheets Webhook URL.'); return; }
 
@@ -392,6 +384,7 @@ async function generateLeads() {
   await sleep(400);
   addLog(`🎯 Target: ${limit} leads | "${keyword}" | ${location || 'Global'}${bizSize ? ' | ' + bizSize : ''}`);
   addLog(`⚡ Mode: ${isDemo ? 'Demo (sample data)' : 'Live (Apify)'}`);
+  addLog(`📧 Emails sourced directly from Google Maps data`);
   await sleep(300);
 
   let leads = [];
@@ -441,47 +434,9 @@ async function generateLeads() {
     addLog(`✅ Social profiles found (demo)`);
   }
 
-  setProgress(55, 'Finding decision-maker emails...');
-
-  // ── STEP 3: Hunter.io — decision-maker emails only ──
-  addLog(`📧 Step 3: Finding decision-maker emails via Hunter.io...`);
-  await sleep(400);
-  if (hunterKey && !isDemo) {
-    let found = 0;
-    for (let i = 0; i < leads.length; i += 5) {
-      const batch = leads.slice(i, i + 5);
-      await Promise.all(batch.map(async (lead, bi) => {
-        if (!lead.website) return;
-        try {
-          const domain = lead.website.replace(/https?:\/\//, '').split('/')[0].replace(/^www\./, '');
-          const res = await fetch(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterKey}&limit=10`);
-          const data = await res.json();
-          const emails = (data?.data?.emails || []);
-          // filter for decision-makers only
-          const dmEmails = emails.filter(e => isDecisionMakerEmail(e)).sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
-          if (dmEmails.length) {
-            leads[i + bi].email = dmEmails[0].value.trim().toLowerCase();
-            leads[i + bi].emailName = `${dmEmails[0].first_name || ''} ${dmEmails[0].last_name || ''}`.trim();
-            leads[i + bi].emailTitle = dmEmails[0].position || '';
-            found++;
-          }
-        } catch {}
-      }));
-      if (i + 5 < leads.length) await sleep(1000);
-    }
-    addLog(`✅ Decision-maker emails found: ${found}/${leads.length}`);
-  } else if (isDemo) {
-    await sleep(800);
-    addLog(`✅ Decision-maker emails enriched (demo)`);
-  } else {
-    addLog(`⚠️ No Hunter.io key — skipping email enrichment`);
-  }
-
-  // Recalculate scores
-  leads = leads.map(l => ({
-    ...l,
-    score: calcScore(l.website, l.email, l.phone, l.linkedin, l.instagram, l.facebook)
-  }));
+  setProgress(55, 'Processing emails...');
+  const withEmail = leads.filter(l => l.email).length;
+  addLog(`📧 Step 3: Emails extracted from Google Maps — ${withEmail}/${leads.length} leads have emails`);
 
   setProgress(80, 'Pushing to Google Sheets...');
   await finishRun(leads, isDemo, webhook, hunterKey);
@@ -521,10 +476,6 @@ async function finishRun(leads, isDemo, webhook, hunterKey) {
     avgScore: leads.length ? (leads.reduce((a, b) => a + b.score, 0) / leads.length).toFixed(1) : '0',
     mode: isDemo ? 'Demo' : 'Live'
   };
-  runHistory.unshift(entry);
-  if (runHistory.length > 20) runHistory.pop();
-  try { localStorage.setItem('lf_history', JSON.stringify(runHistory)); } catch {}
-  renderHistory();
   renderResults(leads);
 
   running = false;
@@ -538,6 +489,19 @@ async function finishRun(leads, isDemo, webhook, hunterKey) {
   document.getElementById('tab-results').classList.add('active');
   document.getElementById('panel-results').classList.add('active');
   document.getElementById('tab-results').textContent = `📊 Leads (${leads.length})`;
+}
+
+function resetFilters() {
+  document.getElementById('leadCount').value = '';
+  document.getElementById('keyword').value   = '';
+  document.getElementById('location').value  = '';
+  document.getElementById('bizSize').value   = '';
+  ['leadCount','keyword','location'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('error');
+    const err = document.getElementById('err-' + id);
+    if (err) err.classList.remove('show');
+  });
 }
 
 function resetAll() {
@@ -606,24 +570,7 @@ function renderTable() {
     </tr>`).join('');
 }
 
-function renderHistory() {
-  const el = document.getElementById('historyList');
-  if (!runHistory.length) {
-    el.innerHTML = `<div class="empty-state" style="padding:40px 20px"><div class="empty-icon">🕓</div><div class="empty-title">No runs yet</div><div class="empty-sub">Your run history will appear here</div></div>`;
-    return;
-  }
-  el.innerHTML = runHistory.map((r, i) => `
-    <div class="history-item">
-      <div>
-        <div style="font-weight:700;font-size:14px;color:var(--gray-800)">Run #${runHistory.length - i} — "${r.keyword}" · ${r.location}</div>
-        <div style="font-size:12px;color:var(--gray-400);margin-top:3px">${r.date} · Avg score: ${r.avgScore}/10 · Emails: ${r.withEmail || 0} · <span style="color:${r.mode === 'Demo' ? '#f59e0b' : '#10b981'};font-weight:600">${r.mode}</span></div>
-      </div>
-      <div style="text-align:right;flex-shrink:0;margin-left:16px">
-        <div class="history-count">${r.count}</div>
-        <div style="font-size:11px;color:var(--gray-400)">leads</div>
-      </div>
-    </div>`).join('');
-}
+
 </script>
 </body>
 </html>
