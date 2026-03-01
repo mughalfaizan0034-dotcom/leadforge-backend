@@ -32,67 +32,85 @@ async function getItems(datasetId, token, limit) {
 }
 
 // ── Lead score calculator ──
-function score(w, e, p, li, ig, fb) {
+function calcScore(website, email, phone, linkedin, instagram, facebook) {
   let s = 4;
-  if (w) s += 1;
-  if (e) s += 2;
-  if (p) s += 1;
-  if (li || ig || fb) s += 2;
+  if (website)  s += 1;
+  if (email)    s += 2;
+  if (phone)    s += 1;
+  if (linkedin || instagram || facebook) s += 2;
   return Math.min(s, 10);
 }
 
 // ── Email validators ──
-const BLOCKED_PREFIXES = ["info","contact","hello","support","help","admin","sales","team","office","general","enquiries","enquiry","noreply","no-reply","mail","webmaster","marketing","accounts","billing","hr","careers","jobs","press","media","feedback"];
-const BLOCKED_DOMAINS  = ["example.com","test.com","fake.com","mailinator.com","tempmail.com","guerrillamail.com","yopmail.com","trashmail.com","sharklasers.com","none.com","noreply.com","no-reply.com"];
-const DM_TITLES        = ["ceo","founder","co-founder","owner","director","head","vp","vice president","president","chief","manager","partner","principal","cto","coo","cmo"];
+const BLOCKED_PREFIXES = ["noreply","no-reply","donotreply","do-not-reply","unsubscribe"];
+const BLOCKED_DOMAINS  = ["example.com","test.com","fake.com","mailinator.com","tempmail.com","guerrillamail.com","yopmail.com","trashmail.com","sharklasers.com","none.com"];
 
 function isValidEmail(email) {
   if (!email || typeof email !== "string") return false;
   const clean = email.trim().toLowerCase();
   if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(clean)) return false;
-  const domain = clean.split("@")[1];
+  const [prefix, domain] = clean.split("@");
   if (BLOCKED_DOMAINS.includes(domain)) return false;
+  if (BLOCKED_PREFIXES.some(b => prefix === b || prefix.startsWith(b))) return false;
   return true;
 }
 
-function isDecisionMaker(emailObj) {
-  if (!emailObj || !isValidEmail(emailObj.value)) return false;
-  const prefix = emailObj.value.split("@")[0].toLowerCase();
-  if (BLOCKED_PREFIXES.some(b => prefix === b || prefix.startsWith(b + "."))) return false;
-  const hasName = /^[a-z]+[\.\-_][a-z]+/.test(prefix) || /^[a-z]{3,}$/.test(prefix);
-  const pos = (emailObj.position || emailObj.type || "").toLowerCase();
-  const isDM = DM_TITLES.some(t => pos.includes(t));
-  return (hasName && (emailObj.confidence || 0) >= 50) || isDM;
-}
+// ── Extract best email from Apify Google Maps result ──
+function extractEmail(item) {
+  const candidates = [
+    item.email,
+    item.emails,
+    item.additionalInfo?.email,
+    item.website && item.website.includes("@") ? item.website : null,
+  ].flat().filter(Boolean);
 
-// ── Clean email before pushing ──
-function cleanEmail(email) {
-  if (!isValidEmail(email)) return "";
-  return email.trim().toLowerCase();
+  // regex scan entire raw JSON for any email
+  const rawStr = JSON.stringify(item);
+  const emailMatches = rawStr.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g) || [];
+  candidates.push(...emailMatches);
+
+  const seen = new Set();
+  for (const e of candidates) {
+    const clean = typeof e === "string" ? e.trim().toLowerCase() : "";
+    if (clean && !seen.has(clean) && isValidEmail(clean)) {
+      seen.add(clean);
+      return clean;
+    }
+  }
+  return "";
 }
 
 // ── GOOGLE MAPS ──
 app.post("/scrape/google-maps", async (req, res) => {
   try {
     const { keyword, location, limit, token } = req.body;
+    const searchQuery = [keyword, location].filter(Boolean).join(" ");
     const { data } = await axios.post(`${BASE}/acts/nwua9Gu5YrADL7ZDj/runs?token=${token}`, {
-      searchStringsArray: [`${keyword} ${location}`],
-      maxCrawledPlacesPerSearch: parseInt(limit) || 10
+      searchStringsArray: [searchQuery],
+      maxCrawledPlacesPerSearch: parseInt(limit) || 10,
+      scrapeContacts: true,
+      includeHistogram: false,
+      includeOpeningHours: false,
+      includePeopleAlsoSearch: false,
     });
     const did = await waitForRun(data.data.id, token);
     const items = await getItems(did, token, limit);
-    const leads = items.map(i => ({
-      name:     i.title || i.name || "",
-      website:  i.website || "",
-      email:    "",
-      phone:    i.phone || i.phoneNumber || "",
-      location: i.address || i.city || "",
-      linkedin: "",
-      instagram:"",
-      facebook: "",
-      score:    score(i.website, "", i.phone, "", "", "")
-    }));
-    res.json({ success: true, leads });
+    const leads = items.map(i => {
+      const email = extractEmail(i);
+      return {
+        name:      i.title || i.name || "",
+        website:   i.website || "",
+        email,
+        phone:     i.phone || i.phoneNumber || "",
+        location:  i.address || i.city || "",
+        linkedin:  "",
+        instagram: "",
+        facebook:  "",
+        score:     calcScore(i.website, email, i.phone, "", "", "")
+      };
+    });
+    const withEmail = leads.filter(l => l.email).length;
+    res.json({ success: true, leads, withEmail });
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
 
@@ -168,41 +186,11 @@ app.post("/enrich/social", async (req, res) => {
         }
       } catch {}
 
-      return { ...lead, ...results };
+      const updatedLead = { ...lead, ...results };
+      updatedLead.score = calcScore(updatedLead.website, updatedLead.email, updatedLead.phone, results.linkedin, results.instagram, results.facebook);
+      return updatedLead;
     }));
 
-    res.json({ success: true, leads: enriched });
-  } catch (e) { res.status(500).json({ success: false, error: e.message }); }
-});
-
-// ── HUNTER.IO BULK EMAIL ENRICHMENT (decision-makers only) ──
-app.post("/enrich/emails", async (req, res) => {
-  try {
-    const { leads, hunterApiKey } = req.body;
-    if (!hunterApiKey) return res.json({ success: true, leads });
-
-    const enriched = [];
-    for (let i = 0; i < leads.length; i += 5) {
-      const batch = leads.slice(i, i + 5);
-      const results = await Promise.all(batch.map(async (lead) => {
-        if (!lead.website) return lead;
-        try {
-          const domain = lead.website.replace(/https?:\/\//, "").split("/")[0].replace(/^www\./, "");
-          if (!domain || domain.length < 4) return lead;
-          const { data } = await axios.get(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterApiKey}&limit=10`);
-          const emails = (data?.data?.emails || []);
-          const dmEmails = emails.filter(e => isDecisionMaker(e)).sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
-          if (dmEmails.length) {
-            lead.email      = dmEmails[0].value.trim().toLowerCase();
-            lead.emailName  = `${dmEmails[0].first_name || ""} ${dmEmails[0].last_name || ""}`.trim();
-            lead.emailTitle = dmEmails[0].position || "";
-          }
-        } catch {}
-        return lead;
-      }));
-      enriched.push(...results);
-      if (i + 5 < leads.length) await new Promise(r => setTimeout(r, 1000));
-    }
     res.json({ success: true, leads: enriched });
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
@@ -211,20 +199,17 @@ app.post("/enrich/emails", async (req, res) => {
 app.post("/push/sheets", async (req, res) => {
   try {
     const { webhookUrl, leads } = req.body;
-    // sanitize emails — only push verified decision-maker emails
     const cleaned = leads.map(l => ({
-      name:       l.name       || "",
-      website:    l.website    || "",
-      phone:      l.phone      || "",
-      location:   l.location   || "",
-      linkedin:   l.linkedin   || "",
-      instagram:  l.instagram  || "",
-      facebook:   l.facebook   || "",
-      email:      cleanEmail(l.email),
-      emailName:  l.emailName  || "",
-      emailTitle: l.emailTitle || "",
-      score:      l.score      || 0,
-      date:       new Date().toLocaleString()
+      name:      l.name      || "",
+      website:   l.website   || "",
+      phone:     l.phone     || "",
+      location:  l.location  || "",
+      linkedin:  l.linkedin  || "",
+      instagram: l.instagram || "",
+      facebook:  l.facebook  || "",
+      email:     isValidEmail(l.email) ? l.email.trim().toLowerCase() : "",
+      score:     l.score     || 0,
+      date:      new Date().toLocaleString()
     }));
     await axios.post(webhookUrl, { leads: cleaned });
     const withEmail = cleaned.filter(l => l.email).length;
