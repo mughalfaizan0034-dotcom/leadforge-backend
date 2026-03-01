@@ -35,8 +35,11 @@ function score(w, e, p) {
   return Math.min(s, 10);
 }
 
-// ── Health check ──
-app.get("/", (req, res) => res.json({ status: "LeadForge backend running ✅" }));
+// ── Serve frontend ──
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
+app.get("/health", (req, res) => res.json({ status: "LeadForge backend running ✅" }));
 
 // ── Google Maps ──
 app.post("/scrape/google-maps", async (req, res) => {
