@@ -105,39 +105,48 @@ app.post("/enrich/hunter", async (req, res) => {
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
 
-// ── Validate email format ──
-function isValidEmail(email) {
+// ── Blocked email prefixes (support/system roles — not decision makers) ──
+const BLOCKED_PREFIXES = [
+  "noreply","no-reply","donotreply","do-not-reply","support","help","helpdesk",
+  "contact","newsletter","subscribe","unsubscribe","mailer","daemon","bounce",
+  "postmaster","webmaster","hostmaster","abuse","spam","robot","bot","auto",
+  "notification","notifications","alerts","system","admin@admin","test@","fake@",
+  "example@","privacy","legal","compliance","billing@billing","accounts@accounts"
+];
+
+const BLOCKED_DOMAINS = [
+  "example.com","test.com","fake.com","mailinator.com","tempmail.com",
+  "guerrillamail.com","yopmail.com","trashmail.com","sharklasers.com",
+  "none.com","noreply.com","no-reply.com","domain.com"
+];
+
+// ── Validate email is real and from a decision maker ──
+function isDecisionMakerEmail(email) {
   if (!email || typeof email !== "string") return false;
   const clean = email.trim().toLowerCase();
-  // must match standard email pattern
   const re = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
   if (!re.test(clean)) return false;
-  // reject disposable / fake domains
-  const blocked = ["example.com","test.com","fake.com","mailinator.com","tempmail.com","guerrillamail.com","yopmail.com","trashmail.com","sharklasers.com","none.com","noreply.com","no-reply.com"];
-  const domain = clean.split("@")[1];
-  if (blocked.includes(domain)) return false;
-  // reject placeholder patterns
-  if (/^(test|fake|noreply|no-reply|admin@admin|info@info|example)/.test(clean)) return false;
+  const [prefix, domain] = clean.split("@");
+  if (BLOCKED_DOMAINS.includes(domain)) return false;
+  if (BLOCKED_PREFIXES.some(b => prefix.startsWith(b))) return false;
   return true;
 }
 
-// ── Enrich single lead email via Hunter.io ──
-async function enrichEmail(lead, hunterApiKey) {
-  if (isValidEmail(lead.email)) return lead; // already has valid email
+// ── Enrich a single business with multiple verified emails ──
+async function enrichEmails(lead, hunterApiKey) {
   if (!lead.website) return lead;
   try {
     const domain = lead.website.replace(/https?:\/\//, "").split("/")[0].replace(/^www\./, "");
     if (!domain || domain.length < 4) return lead;
-    const { data } = await axios.get(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterApiKey}&limit=1`);
-    const emails = data?.data?.emails || [];
-    // pick highest confidence verified email
-    const best = emails
-      .filter(e => e.value && isValidEmail(e.value))
-      .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))[0];
-    if (best) {
-      lead.email = best.value;
-      lead.score = Math.min(lead.score + 2, 10);
-    }
+    const { data } = await axios.get(
+      `https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${hunterApiKey}&limit=10`
+    );
+    const emails = (data?.data?.emails || [])
+      .filter(e => e.value && isDecisionMakerEmail(e.value))
+      .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))
+      .map(e => e.value.trim().toLowerCase());
+    // deduplicate
+    lead.emails = [...new Set(emails)];
   } catch {}
   return lead;
 }
@@ -147,29 +156,28 @@ app.post("/enrich/emails", async (req, res) => {
   try {
     const { leads, hunterApiKey } = req.body;
     if (!hunterApiKey) return res.json({ success: true, leads });
-    // process in batches of 5 to avoid rate limiting
     const enriched = [];
     for (let i = 0; i < leads.length; i += 5) {
       const batch = leads.slice(i, i + 5);
-      const results = await Promise.all(batch.map(l => enrichEmail(l, hunterApiKey)));
+      const results = await Promise.all(batch.map(l => enrichEmails(l, hunterApiKey)));
       enriched.push(...results);
-      if (i + 5 < leads.length) await new Promise(r => setTimeout(r, 1000)); // 1s pause between batches
+      if (i + 5 < leads.length) await new Promise(r => setTimeout(r, 1200));
     }
     res.json({ success: true, leads: enriched });
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
 
-// ── Push to Google Sheets (only valid emails) ──
+// ── Push to Google Sheets ──
 app.post("/push/sheets", async (req, res) => {
   try {
     const { webhookUrl, leads } = req.body;
-    // sanitize: clean and validate emails before pushing
+    // each lead: join multiple emails as comma-separated, only decision-maker emails
     const cleaned = leads.map(l => ({
       ...l,
-      email: isValidEmail(l.email) ? l.email.trim().toLowerCase() : ""
+      emails: (l.emails || []).filter(isDecisionMakerEmail).join(", ")
     }));
     await axios.post(webhookUrl, { leads: cleaned });
-    const withEmail = cleaned.filter(l => l.email).length;
+    const withEmail = cleaned.filter(l => l.emails).length;
     res.json({ success: true, count: cleaned.length, withEmail });
   } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 });
