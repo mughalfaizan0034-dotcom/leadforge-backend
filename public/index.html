@@ -34,6 +34,15 @@
   .content{padding:20px 24px 40px}
   .panel{display:none}
   .panel.active{display:block}
+  /* SEARCH BAR */
+  .search-bar{background:#fff;border-radius:16px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200);margin-bottom:20px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+  .search-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:160px}
+  .search-label{font-size:12px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.4px}
+  .search-input{padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;color:var(--gray-800);transition:border .2s,box-shadow .2s;width:100%}
+  .search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+  .search-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+  .range-val{font-weight:700;color:var(--primary)}
+  /* GRID */
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200)}
   .card-title{font-weight:700;font-size:16px;color:var(--gray-800);margin-bottom:16px;display:flex;align-items:center;gap:8px}
@@ -43,31 +52,26 @@
   .form-label{font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:5px;display:block}
   .form-hint{font-size:11px;color:var(--gray-400);margin-bottom:8px;line-height:1.6}
   .input-wrap{position:relative}
-  .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;transition:border .2s,box-shadow .2s;color:var(--gray-800)}
+  .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;background:var(--gray-50);outline:none;transition:border .2s;color:var(--gray-800)}
   .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
-  .form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
   .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--gray-400)}
-  input[type=range]{width:100%;accent-color:var(--primary);cursor:pointer}
-  .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-400);margin-top:2px}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-  .tag{padding:5px 13px;border-radius:20px;border:1.5px solid var(--gray-200);background:var(--gray-50);color:var(--gray-600);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s}
-  .tag:hover{border-color:#c7d2fe;color:var(--primary)}
-  .tag.active{border-color:var(--primary);background:var(--primary-light);color:var(--primary);font-weight:600}
-  .actor-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--gray-100)}
-  .actor-row:last-child{border-bottom:none}
-  .actor-info{display:flex;align-items:center;gap:10px}
-  .actor-icon{font-size:22px}
-  .actor-name{font-weight:600;font-size:14px;color:var(--gray-800)}
-  .actor-id{font-size:11px;color:var(--gray-400);font-family:monospace}
-  .toggle{width:44px;height:24px;background:var(--gray-200);border-radius:12px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;border:none}
-  .toggle.on{background:var(--primary)}
-  .toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-  .toggle.on::after{left:23px}
+  /* PLATFORM CARDS */
+  .platform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px}
+  .platform-card{border:2px solid var(--gray-200);border-radius:12px;padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s;background:var(--gray-50)}
+  .platform-card.active{border-color:var(--primary);background:var(--primary-light)}
+  .platform-card.locked{border-color:#10b981;background:#ecfdf5;cursor:default}
+  .platform-card-icon{font-size:24px;margin-bottom:4px}
+  .platform-card-name{font-size:12px;font-weight:700;color:var(--gray-600)}
+  .platform-card.active .platform-card-name{color:var(--primary)}
+  .platform-card.locked .platform-card-name{color:#10b981}
+  .platform-lock{font-size:10px;color:#10b981;font-weight:600;margin-top:2px}
+  /* STATS */
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
   .stat-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200)}
   .stat-icon{font-size:26px;margin-bottom:6px}
   .stat-value{font-size:24px;font-weight:800}
   .stat-label{font-size:12px;color:var(--gray-400);font-weight:600;margin-top:2px}
+  /* TABLE */
   .table-wrap{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--gray-200);overflow:hidden}
   .table-header{padding:16px 20px;border-bottom:1px solid var(--gray-100)}
   .table-title{font-weight:700;font-size:15px;color:var(--gray-800);margin-bottom:10px}
@@ -78,13 +82,14 @@
   .table-scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse}
   th{padding:12px 16px;text-align:left;font-size:12px;font-weight:700;color:var(--gray-600);background:var(--gray-50);border-bottom:1px solid var(--gray-200);white-space:nowrap}
-  td{padding:13px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-600)}
+  td{padding:13px 16px;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-600);vertical-align:top}
   tr:last-child td{border-bottom:none}
   tr:hover td{background:var(--gray-50)}
   .td-name{font-weight:700;color:var(--gray-800);font-size:14px}
   .td-link{color:var(--primary);text-decoration:none;font-weight:500}
   .td-link:hover{text-decoration:underline}
   .td-empty{color:var(--gray-200)}
+  .email-chip{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 8px;font-size:11px;margin:2px 2px 2px 0;font-weight:500}
   .score-badge{border-radius:20px;padding:3px 10px;font-weight:700;font-size:13px}
   .score-high{background:#ecfdf5;color:#10b981}
   .score-mid{background:#fffbeb;color:#f59e0b}
@@ -94,35 +99,28 @@
   .p-linkedin{background:#e3f2fd;color:#1565c0}
   .p-instagram{background:#fce4ec;color:#880e4f}
   .p-facebook{background:#e8eaf6;color:#283593}
-  .p-hunter{background:#fff8e1;color:#f57f17}
+  /* LOG */
   .log-box{background:var(--gray-50);border-radius:12px;padding:16px;height:440px;overflow-y:auto;border:1px solid var(--gray-200);font-family:monospace;font-size:13px;line-height:1.8}
   .log-ok{color:#10b981}
   .log-err{color:#ef4444}
   .log-info{color:#6366f1}
+  .log-warn{color:#f59e0b}
   .log-gray{color:var(--gray-400)}
-  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
   .empty-state{text-align:center;padding:60px 20px}
   .empty-icon{font-size:52px;margin-bottom:12px}
   .empty-title{font-size:18px;font-weight:700;color:var(--gray-800);margin-bottom:6px}
   .empty-sub{font-size:14px;color:var(--gray-400)}
-  .info-card{background:linear-gradient(135deg,#eef2ff,#f5f3ff);border-radius:16px;padding:20px;border:1px solid #c7d2fe}
-  .info-title{font-weight:700;font-size:14px;color:var(--primary-dark);margin-bottom:12px}
-  .info-item{display:flex;gap:8px;margin-bottom:8px;font-size:13px;color:var(--primary-dark);align-items:flex-start}
-  .info-link{display:inline-block;margin-top:10px;background:var(--primary);color:#fff;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;text-decoration:none}
-  .info-link:hover{background:var(--primary-dark)}
-  .spinner{width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  /* history */
   .history-list{display:flex;flex-direction:column;gap:10px}
   .history-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
   .history-meta{font-size:12px;color:var(--gray-400);margin-top:2px}
   .history-count{font-size:22px;font-weight:800;color:var(--primary)}
-  @media(max-width:768px){.grid-2{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.header{padding:0 16px}.content{padding:16px 16px 40px}.tabs-wrap{padding:16px 16px 0}.header-right{gap:6px}.btn{padding:8px 14px;font-size:13px}}
+  .spinner{width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:768px){.grid-2{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.header{padding:0 16px}.content{padding:16px 16px 40px}.tabs-wrap{padding:16px 16px 0}.platform-grid{grid-template-columns:repeat(2,1fr)}.search-bar{flex-direction:column}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="logo">
     <div class="logo-icon">⚡</div>
@@ -138,7 +136,6 @@
   </div>
 </div>
 
-<!-- PROGRESS -->
 <div class="progress-bar-wrap" id="progressWrap">
   <div class="progress-top">
     <span id="progressLabel">Starting...</span>
@@ -147,7 +144,6 @@
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 </div>
 
-<!-- TABS -->
 <div class="tabs-wrap">
   <div class="tabs">
     <button class="tab active" id="tab-config" onclick="showTab('config',this)">⚙️ Configure</button>
@@ -157,17 +153,73 @@
   </div>
 </div>
 
-<!-- CONTENT -->
 <div class="content">
 
   <!-- CONFIG -->
   <div class="panel active" id="panel-config">
+
+    <!-- SEARCH FILTERS (TOP) -->
+    <div class="search-bar">
+      <div class="search-field" style="flex:2;min-width:200px">
+        <label class="search-label">🔍 Search Keyword</label>
+        <input class="search-input" type="text" id="keyword" placeholder="e.g. ecommerce store, clothing brand, online shop" value="ecommerce store"/>
+      </div>
+      <div class="search-field">
+        <label class="search-label">📍 Location</label>
+        <input class="search-input" type="text" id="location" placeholder="e.g. New York, USA"/>
+      </div>
+      <div class="search-field">
+        <label class="search-label">📊 Business Size</label>
+        <select class="search-input search-select" id="bizSize">
+          <option value="">Any Size</option>
+          <option>Startup (1-10)</option>
+          <option>Small (11-50)</option>
+          <option>Medium (51-200)</option>
+          <option>Large (200+)</option>
+        </select>
+      </div>
+      <div class="search-field" style="max-width:160px">
+        <label class="search-label">🎯 Leads: <span class="range-val" id="leadCountVal">50</span></label>
+        <input type="range" min="1" max="500" value="50" id="leadCount" style="width:100%;accent-color:var(--primary);margin-top:8px" oninput="document.getElementById('leadCountVal').textContent=this.value"/>
+      </div>
+    </div>
+
+    <!-- PLATFORM INFO -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-title">🔗 Data Sources <span style="font-size:12px;color:var(--gray-400);font-weight:400">— Google Maps is the primary source. All other platforms are cross-referenced automatically.</span></div>
+      <div class="platform-grid">
+        <div class="platform-card locked">
+          <div class="platform-card-icon">🗺️</div>
+          <div class="platform-card-name">Google Maps</div>
+          <div class="platform-lock">Primary ✓ Always On</div>
+        </div>
+        <div class="platform-card active" id="pc-linkedin" onclick="togglePlatform('linkedin',this)">
+          <div class="platform-card-icon">💼</div>
+          <div class="platform-card-name">LinkedIn</div>
+          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
+        </div>
+        <div class="platform-card active" id="pc-instagram" onclick="togglePlatform('instagram',this)">
+          <div class="platform-card-icon">📸</div>
+          <div class="platform-card-name">Instagram</div>
+          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
+        </div>
+        <div class="platform-card active" id="pc-facebook" onclick="togglePlatform('facebook',this)">
+          <div class="platform-card-icon">👍</div>
+          <div class="platform-card-name">Facebook</div>
+          <div style="font-size:10px;color:var(--primary);margin-top:2px;font-weight:600">Cross-reference ✓</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:12px 14px;background:#fffbeb;border-radius:10px;border:1px solid #fde68a;font-size:12px;color:#92400e">
+        ⚡ <strong>How it works:</strong> Scrapes businesses from Google Maps → finds their LinkedIn/Instagram/Facebook profiles → enriches with decision-maker emails via Hunter.io → pushes all data to Google Sheets in one row per business.
+      </div>
+    </div>
+
     <div class="grid-2">
       <div style="display:flex;flex-direction:column;gap:20px">
 
         <div class="card">
           <div class="card-title">🔑 Apify API Token <span class="badge-req">Required</span></div>
-          <div class="form-hint">Get it from <a href="https://console.apify.com/account/integrations" target="_blank" style="color:var(--primary)">console.apify.com → Settings → Integrations</a><br/>Type <strong style="color:var(--primary)">demo</strong> to test with sample data — no account needed.</div>
+          <div class="form-hint">Get from <a href="https://console.apify.com/account/integrations" target="_blank" style="color:var(--primary)">console.apify.com → Settings → Integrations</a><br/>Type <strong style="color:var(--primary)">demo</strong> to test with sample data.<br/>✅ Backend: <strong style="color:#10b981">leadforge-backend-81md.onrender.com</strong></div>
           <div class="input-wrap">
             <input class="form-input" type="password" id="apifyToken" placeholder="apify_api_xxxxxxxxxxxx  or  demo"/>
             <button class="eye-btn" onclick="toggleEye('apifyToken',this)">👁️</button>
@@ -175,89 +227,27 @@
         </div>
 
         <div class="card">
-          <div class="card-title">📄 Google Sheets Webhook <span class="badge-req">Required</span></div>
-          <div class="form-hint">Paste your Google Apps Script Web App URL.<br/>Leads are pushed here after every run.</div>
-          <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
-        </div>
-
-        <div class="card">
           <div class="card-title">📧 Hunter.io API Key <span class="badge-opt">Optional</span></div>
-          <div class="form-hint">Used to find emails for leads that don't have one. Enable Hunter actor below to activate.</div>
+          <div class="form-hint">Finds decision-maker emails for each business. Only verified, role-based emails like <code style="color:var(--primary)">name@domain.com</code> or <code style="color:var(--primary)">info@domain.com</code> are kept. Support/noreply emails are auto-skipped.</div>
           <div class="input-wrap">
             <input class="form-input" type="password" id="hunterKey" placeholder="your-hunter-api-key"/>
             <button class="eye-btn" onclick="toggleEye('hunterKey',this)">👁️</button>
           </div>
         </div>
 
-        <div class="info-card">
-          <div class="info-title">💡 Cost Saving Tips</div>
-          <div class="info-item"><span>💰</span><span>Apify free tier = $5 credits/month (~500 leads)</span></div>
-          <div class="info-item"><span>🎯</span><span>Use specific keyword + location to avoid wasting credits</span></div>
-          <div class="info-item"><span>⚡</span><span>Enable only the actors you need per run</span></div>
-          <div class="info-item"><span>📧</span><span>Hunter.io free = 25 email searches/month</span></div>
-          <div class="info-item"><span>🧪</span><span>Use <strong>demo</strong> as API key to test the full flow for free</span></div>
-          <a href="https://console.apify.com/sign-up" target="_blank" class="info-link">Create Free Apify Account →</a>
-        </div>
-
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card">
+        <div class="card-title">📄 Google Sheets Webhook <span class="badge-req">Required</span></div>
+        <div class="form-hint">Your Apps Script Web App URL. Each business gets one row with all social profiles and all verified emails.</div>
+        <input class="form-input" type="text" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom:20px"/>
 
-        <div class="card">
-          <div class="card-title">🤖 Apify Actors <span style="font-size:12px;color:var(--gray-400);font-weight:400">(select data sources)</span></div>
-          <div class="actor-row">
-            <div class="actor-info"><span class="actor-icon">🗺️</span><div><div class="actor-name">Google Maps Scraper</div><div class="actor-id">nwua9Gu5YrADL7ZDj</div></div></div>
-            <button class="toggle on" id="toggle-googleMaps" onclick="toggleActor('googleMaps',this)"></button>
-          </div>
-          <div class="actor-row">
-            <div class="actor-info"><span class="actor-icon">💼</span><div><div class="actor-name">LinkedIn Company Scraper</div><div class="actor-id">2SyF0bVxmgGr8IVCZ</div></div></div>
-            <button class="toggle on" id="toggle-linkedin" onclick="toggleActor('linkedin',this)"></button>
-          </div>
-          <div class="actor-row">
-            <div class="actor-info"><span class="actor-icon">📸</span><div><div class="actor-name">Instagram Business Scraper</div><div class="actor-id">reGe1ST3OBgYZSsZJ</div></div></div>
-            <button class="toggle" id="toggle-instagram" onclick="toggleActor('instagram',this)"></button>
-          </div>
-          <div class="actor-row">
-            <div class="actor-info"><span class="actor-icon">👍</span><div><div class="actor-name">Facebook Business Scraper</div><div class="actor-id">KoJrdxJCTtpon81KY</div></div></div>
-            <button class="toggle" id="toggle-facebook" onclick="toggleActor('facebook',this)"></button>
-          </div>
-          <div class="actor-row">
-            <div class="actor-info"><span class="actor-icon">📧</span><div><div class="actor-name">Hunter.io Email Finder</div><div class="actor-id">via hunter.io API</div></div></div>
-            <button class="toggle" id="toggle-hunter" onclick="toggleActor('hunter',this)"></button>
+        <div style="background:var(--gray-50);border-radius:12px;padding:16px;border:1px solid var(--gray-200)">
+          <div style="font-weight:700;font-size:13px;color:var(--gray-800);margin-bottom:10px">📋 Sheet Columns (auto-populated)</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px">
+            ${["Business Name","Website","Phone","Location","Google Maps URL","LinkedIn URL","Instagram URL","Facebook URL","Emails (verified)","Lead Score","Date Added"].map((c,i)=>`<div style="font-size:12px;color:var(--gray-600);display:flex;gap:6px;align-items:center"><span style="background:var(--primary-light);color:var(--primary);border-radius:4px;padding:1px 6px;font-weight:700;font-size:10px">${i+1}</span>${c}</div>`).join('')}
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-title">🎯 Lead Filters</div>
-          <div class="form-group">
-            <label class="form-label">Number of Leads: <strong style="color:var(--primary)" id="leadCountVal">50</strong></label>
-            <input type="range" min="1" max="500" value="50" id="leadCount" oninput="document.getElementById('leadCountVal').textContent=this.value"/>
-            <div class="range-labels"><span>1</span><span>500</span></div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Search Keyword</label>
-            <input class="form-input" type="text" id="keyword" placeholder="e.g. ecommerce store, online shop" value="ecommerce store"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Target Location</label>
-            <input class="form-input" type="text" id="location" placeholder="e.g. New York, USA or leave empty for global"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Business Size</label>
-            <select class="form-input form-select" id="bizSize">
-              <option value="">Any Size</option>
-              <option>Startup (1-10)</option>
-              <option>Small (11-50)</option>
-              <option>Medium (51-200)</option>
-              <option>Large (200+)</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin-bottom:0">
-            <label class="form-label">Ecommerce Niches</label>
-            <div class="tags" id="nicheTags"></div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -266,9 +256,7 @@
   <div class="panel" id="panel-logs">
     <div class="card">
       <div class="card-title">📋 Activity Log</div>
-      <div class="log-box" id="logBox">
-        <div class="log-gray">No activity yet. Click ⚡ Run to start.</div>
-      </div>
+      <div class="log-box" id="logBox"><div class="log-gray">No activity yet. Click ⚡ Run to start.</div></div>
     </div>
   </div>
 
@@ -289,13 +277,13 @@
             <select class="sort-select" id="sortSelect" onchange="renderTable()">
               <option value="score">Sort: Lead Score</option>
               <option value="name">Sort: Name A–Z</option>
-              <option value="platform">Sort: Platform</option>
+              <option value="emails">Sort: Has Email First</option>
             </select>
           </div>
         </div>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>#</th><th>Business Name</th><th>Website</th><th>Email</th><th>Phone</th><th>Location</th><th>Platform</th><th>Score</th></tr></thead>
+            <thead><tr><th>#</th><th>Business Name</th><th>Website</th><th>Emails</th><th>Phone</th><th>Location</th><th>Socials</th><th>Score</th></tr></thead>
             <tbody id="tableBody"></tbody>
           </table>
         </div>
@@ -320,39 +308,20 @@
 </div>
 
 <script>
-const actors = {googleMaps:true,linkedin:true,instagram:false,facebook:false,hunter:false};
-const niches = ["Fashion & Apparel","Electronics","Beauty & Cosmetics","Home & Furniture","Food & Grocery","Sports & Fitness","Jewelry","Pet Supplies","Toys & Kids","Health & Wellness"];
-const selectedNiches = new Set();
-let allLeads = [];
-let activePlatformFilter = "All";
-let running = false;
+const BACKEND = "https://leadforge-backend-81md.onrender.com";
+const platforms = { linkedin: true, instagram: true, facebook: true };
+let allLeads = [], activePlatformFilter = "All", running = false;
 let runHistory = JSON.parse(localStorage.getItem('lf_history') || '[]');
 
 const MOCK = [
-  {name:"StyleHive Store",website:"stylehive.com",email:"contact@stylehive.com",phone:"+1-555-0101",location:"New York, USA",platform:"Google Maps",score:9},
-  {name:"TechGadget Hub",website:"techgadgethub.io",email:"hello@techgadgethub.io",phone:"+1-555-0202",location:"Austin, USA",platform:"LinkedIn",score:8},
-  {name:"GlowUp Cosmetics",website:"glowupco.com",email:"info@glowupco.com",phone:"+1-555-0303",location:"Los Angeles, USA",platform:"Instagram",score:10},
-  {name:"NestCraft Furniture",website:"nestcraft.co",email:"sales@nestcraft.co",phone:"+44-555-0404",location:"London, UK",platform:"Google Maps",score:7},
-  {name:"FreshBasket Foods",website:"freshbasket.com",email:"orders@freshbasket.com",phone:"+1-555-0505",location:"Chicago, USA",platform:"Facebook",score:8},
-  {name:"ProSport Gear",website:"prosportgear.net",email:"team@prosportgear.net",phone:"+1-555-0606",location:"Miami, USA",platform:"Google Maps",score:9},
-  {name:"LuxeJewels Co.",website:"luxejewels.com",email:"luxury@luxejewels.com",phone:"+33-555-0707",location:"Paris, France",platform:"Hunter.io",score:10},
-  {name:"PawsFirst Shop",website:"pawsfirst.store",email:"woof@pawsfirst.store",phone:"+1-555-0808",location:"Seattle, USA",platform:"LinkedIn",score:6},
-  {name:"KidZone Toys",website:"kidzoneplay.com",email:"fun@kidzoneplay.com",phone:"+1-555-0909",location:"Boston, USA",platform:"Google Maps",score:7},
-  {name:"VitalWell Health",website:"vitalwell.health",email:"care@vitalwell.health",phone:"+1-555-1010",location:"Denver, USA",platform:"Hunter.io",score:9},
-  {name:"UrbanThreads",website:"urbanthreads.shop",email:"style@urbanthreads.shop",phone:"+1-555-1111",location:"Portland, USA",platform:"Instagram",score:8},
-  {name:"BrightPixel Tech",website:"brightpixel.tech",email:"dev@brightpixel.tech",phone:"+49-555-1212",location:"Berlin, Germany",platform:"Facebook",score:7},
+  {name:"StyleHive Store",website:"stylehive.com",emails:["contact@stylehive.com","sara@stylehive.com"],phone:"+1-555-0101",location:"New York, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/stylehive",instagramUrl:"https://instagram.com/stylehive",facebookUrl:"",score:9},
+  {name:"TechGadget Hub",website:"techgadgethub.io",emails:["hello@techgadgethub.io"],phone:"+1-555-0202",location:"Austin, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/techgadget",instagramUrl:"",facebookUrl:"https://facebook.com/techgadgethub",score:8},
+  {name:"GlowUp Cosmetics",website:"glowupco.com",emails:["info@glowupco.com","ceo@glowupco.com"],phone:"+1-555-0303",location:"Los Angeles, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"",instagramUrl:"https://instagram.com/glowupco",facebookUrl:"https://facebook.com/glowupco",score:10},
+  {name:"NestCraft Furniture",website:"nestcraft.co",emails:["sales@nestcraft.co"],phone:"+44-555-0404",location:"London, UK",googleMapsUrl:"https://maps.google.com",linkedinUrl:"https://linkedin.com/company/nestcraft",instagramUrl:"https://instagram.com/nestcraft",facebookUrl:"",score:7},
+  {name:"FreshBasket Foods",website:"freshbasket.com",emails:["orders@freshbasket.com","mark@freshbasket.com"],phone:"+1-555-0505",location:"Chicago, USA",googleMapsUrl:"https://maps.google.com",linkedinUrl:"",instagramUrl:"https://instagram.com/freshbasket",facebookUrl:"https://facebook.com/freshbasket",score:8},
 ];
 
-window.onload = () => {
-  const wrap = document.getElementById('nicheTags');
-  niches.forEach(n => {
-    const t = document.createElement('button');
-    t.className='tag'; t.textContent=n;
-    t.onclick=()=>{t.classList.toggle('active'); selectedNiches.has(n)?selectedNiches.delete(n):selectedNiches.add(n);};
-    wrap.appendChild(t);
-  });
-  renderHistory();
-};
+window.onload = () => { renderHistory(); };
 
 function showTab(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
@@ -365,7 +334,13 @@ function toggleEye(id,btn){
   el.type=el.type==='password'?'text':'password';
   btn.textContent=el.type==='password'?'👁️':'🙈';
 }
-function toggleActor(key,btn){actors[key]=!actors[key];btn.classList.toggle('on',actors[key]);}
+function togglePlatform(key,el){
+  platforms[key]=!platforms[key];
+  el.classList.toggle('active',platforms[key]);
+  const sub=el.querySelector('div:last-child');
+  sub.style.color=platforms[key]?'var(--primary)':'var(--gray-400)';
+  sub.textContent=platforms[key]?'Cross-reference ✓':'Disabled';
+}
 function setProgress(pct,label){
   document.getElementById('progressFill').style.width=pct+'%';
   document.getElementById('progressPct').textContent=pct+'%';
@@ -374,49 +349,42 @@ function setProgress(pct,label){
 const logBox=document.getElementById('logBox');
 function addLog(msg){
   const div=document.createElement('div');
-  div.className='log-'+(msg.includes('✅')||msg.includes('✓')?'ok':msg.includes('❌')?'err':msg.match(/[🔍📡🚀⚡🎯📊]/)?'info':'gray');
+  div.className='log-'+(msg.includes('✅')||msg.includes('✓')?'ok':msg.includes('❌')?'err':msg.includes('⚠️')?'warn':msg.match(/[🔍📡🚀⚡🎯📊]/)?'info':'gray');
   div.textContent=msg;
   logBox.appendChild(div);
   logBox.scrollTop=logBox.scrollHeight;
 }
 function clearLog(){logBox.innerHTML='';}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-function calcScore(w,e,p){let s=5;if(w)s+=2;if(e)s+=2;if(p)s+=1;return Math.min(s,10);}
 
-// CORS proxy list — tries each one in order until one works
-const BACKEND = "https://leadforge-backend-81md.onrender.com";
-
-async function callBackend(endpoint, body){
-  const res = await fetch(BACKEND + endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  const data = await res.json();
-  if(!data.success) throw new Error(data.error || 'Backend error');
-  return data;
+function calcScore(lead){
+  let s=4;
+  if(lead.website) s+=1;
+  if(lead.emails&&lead.emails.length>0) s+=2;
+  if(lead.phone) s+=1;
+  if(lead.linkedinUrl) s+=1;
+  if(lead.instagramUrl||lead.facebookUrl) s+=1;
+  return Math.min(s,10);
 }
 
-async function pushToSheets(leads, webhookUrl){
-  try{
-    await fetch(webhookUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({leads})});
-    return true;
-  }catch{return false;}
+async function callBackend(endpoint,body){
+  const res=await fetch(BACKEND+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const data=await res.json();
+  if(!data.success) throw new Error(data.error||'Backend error');
+  return data;
 }
 
 async function generateLeads(){
   if(running) return;
-  const token = document.getElementById('apifyToken').value.trim();
-  const webhook = document.getElementById('webhookUrl').value.trim();
-  const hunterKey = document.getElementById('hunterKey').value.trim();
-  const keyword = document.getElementById('keyword').value.trim()||'ecommerce store';
-  const location = document.getElementById('location').value.trim();
-  const limit = parseInt(document.getElementById('leadCount').value);
-  const isDemo = !token || token==='demo' || token.length<10;
-  const activeActors = Object.entries(actors).filter(([,v])=>v);
+  const token=document.getElementById('apifyToken').value.trim();
+  const webhook=document.getElementById('webhookUrl').value.trim();
+  const hunterKey=document.getElementById('hunterKey').value.trim();
+  const keyword=document.getElementById('keyword').value.trim()||'ecommerce store';
+  const location=document.getElementById('location').value.trim();
+  const limit=parseInt(document.getElementById('leadCount').value);
+  const isDemo=!token||token==='demo'||token.length<10;
 
   if(!webhook){alert('Please enter your Google Sheets Webhook URL.');return;}
-  if(!activeActors.length){alert('Please enable at least one Apify actor.');return;}
 
   running=true; allLeads=[]; clearLog();
   document.getElementById('progressWrap').classList.add('show');
@@ -425,121 +393,145 @@ async function generateLeads(){
   document.getElementById('runBtn').disabled=true;
   document.getElementById('runBtn').innerHTML='<span class="spinner"></span> Running...';
 
-  // switch to logs
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-logs').classList.add('active');
   document.getElementById('panel-logs').classList.add('active');
 
-  setProgress(0,'Starting LeadForge...');
+  setProgress(0,'Starting...');
   addLog('🚀 LeadForge engine starting...');
-  await sleep(400);
-  addLog(`🎯 Target: ${limit} leads | Keyword: "${keyword}" | Location: ${location||'Global'}`);
   await sleep(300);
+  addLog(`🎯 Keyword: "${keyword}" | Location: ${location||'Global'} | Target: ${limit} leads`);
   addLog(`⚡ Mode: ${isDemo?'Demo (sample data)':'Live (Apify API)'}`);
-  addLog(`⚡ Active actors: ${activeActors.map(([k])=>({googleMaps:'Google Maps',linkedin:'LinkedIn',instagram:'Instagram',facebook:'Facebook',hunter:'Hunter.io'}[k])).join(', ')}`);
-  await sleep(400);
+  await sleep(300);
 
   let collected=[];
-  const progStep = 65/activeActors.length;
-  let prog=5;
 
-  const actorLabel={googleMaps:'🗺️ Google Maps',linkedin:'💼 LinkedIn',instagram:'📸 Instagram',facebook:'👍 Facebook'};
-  const actorEndpoint={googleMaps:'/scrape/google-maps',linkedin:'/scrape/linkedin',instagram:'/scrape/instagram',facebook:'/scrape/facebook'};
-  const pMap={googleMaps:'Google Maps',linkedin:'LinkedIn',instagram:'Instagram',facebook:'Facebook'};
+  // STEP 1: Google Maps (primary)
+  addLog('─────────────────────────────────');
+  addLog('📡 STEP 1: Scraping Google Maps (primary source)...');
+  await sleep(400);
+  try{
+    if(isDemo){
+      addLog('🔍 [Demo] Simulating Google Maps scrape...');
+      await sleep(1200);
+      collected=MOCK.map(m=>({...m,emails:[],googleMapsUrl:m.googleMapsUrl}));
+      addLog(`✅ Google Maps — ${collected.length} businesses found`);
+    }else{
+      addLog('🔍 Running Google Maps Actor on Apify...');
+      const d=await callBackend('/scrape/google-maps',{keyword,location,limit,token});
+      collected=(d.leads||[]).map(i=>({
+        name:i.name||'',website:i.website||'',emails:[],
+        phone:i.phone||'',location:i.location||'',
+        googleMapsUrl:i.googleMapsUrl||'',
+        linkedinUrl:'',instagramUrl:'',facebookUrl:'',score:0
+      }));
+      addLog(`✅ Google Maps — ${collected.length} businesses found`);
+    }
+  }catch(err){ addLog(`❌ Google Maps failed: ${err.message}`); }
 
-  for(const [key] of activeActors){
-    if(key==='hunter') continue;
-    const label=actorLabel[key];
-    addLog(`📡 Launching ${label}...`);
-    await sleep(400);
+  setProgress(20,'Cross-referencing platforms...');
+
+  // STEP 2: Cross-reference social platforms
+  const activeSocials=Object.entries(platforms).filter(([,v])=>v).map(([k])=>k);
+  if(activeSocials.length&&collected.length){
+    addLog('─────────────────────────────────');
+    addLog(`📡 STEP 2: Cross-referencing on ${activeSocials.join(', ')}...`);
+    await sleep(300);
+    for(const plat of activeSocials){
+      const labels={linkedin:'💼 LinkedIn',instagram:'📸 Instagram',facebook:'👍 Facebook'};
+      const endpoints={linkedin:'/scrape/linkedin',instagram:'/scrape/instagram',facebook:'/scrape/facebook'};
+      addLog(`🔍 Searching ${labels[plat]} for ${collected.length} businesses...`);
+      await sleep(400);
+      try{
+        if(isDemo){
+          await sleep(800);
+          collected.forEach((b,i)=>{
+            if(plat==='linkedin'&&MOCK[i]?.linkedinUrl) b.linkedinUrl=MOCK[i].linkedinUrl;
+            if(plat==='instagram'&&MOCK[i]?.instagramUrl) b.instagramUrl=MOCK[i].instagramUrl;
+            if(plat==='facebook'&&MOCK[i]?.facebookUrl) b.facebookUrl=MOCK[i].facebookUrl;
+          });
+          addLog(`✅ ${labels[plat]} — profiles matched`);
+        }else{
+          const d=await callBackend(endpoints[plat],{keyword,location,limit,token});
+          const items=d.leads||[];
+          // match by name similarity
+          items.forEach(item=>{
+            const match=collected.find(b=>b.name&&item.name&&b.name.toLowerCase().includes(item.name.toLowerCase().split(' ')[0]));
+            if(match){
+              if(plat==='linkedin') match.linkedinUrl=item.website||item.linkedinUrl||'';
+              if(plat==='instagram') match.instagramUrl=item.website||item.instagramUrl||'';
+              if(plat==='facebook') match.facebookUrl=item.website||item.facebookUrl||'';
+            }
+          });
+          addLog(`✅ ${labels[plat]} — ${items.length} profiles found & matched`);
+        }
+      }catch(err){ addLog(`⚠️ ${labels[plat]} skipped: ${err.message}`); }
+    }
+  }
+
+  setProgress(55,'Finding decision-maker emails...');
+
+  // STEP 3: Email enrichment
+  addLog('─────────────────────────────────');
+  addLog('📡 STEP 3: Finding decision-maker emails via Hunter.io...');
+  await sleep(300);
+  if(!hunterKey&&!isDemo){
+    addLog('⚠️ No Hunter.io key provided — skipping email enrichment');
+  }else{
     try{
       if(isDemo){
-        addLog(`🔍 [Demo] Simulating ${label} run...`);
-        await sleep(1000+Math.random()*800);
-        const chunk=MOCK.filter(l=>l.platform===pMap[key]);
-        collected.push(...chunk);
-        addLog(`✅ ${label} — ${chunk.length} leads found`);
+        await sleep(800);
+        collected.forEach((b,i)=>{ if(MOCK[i]?.emails) b.emails=MOCK[i].emails; });
+        addLog(`✅ Email enrichment done — ${collected.filter(b=>b.emails.length>0).length}/${collected.length} businesses have emails`);
       }else{
-        addLog(`🔍 Calling Render backend → ${label}...`);
-        const data = await callBackend(actorEndpoint[key], { keyword, location, limit: Math.ceil(limit/activeActors.length), token });
-        collected.push(...(data.leads||[]));
-        addLog(`✅ ${label} — ${(data.leads||[]).length} leads scraped`);
+        const d=await callBackend('/enrich/emails',{leads:collected,hunterApiKey:hunterKey});
+        if(d.leads) d.leads.forEach((l,i)=>{ collected[i].emails=l.emails||[]; });
+        const withEmail=collected.filter(b=>b.emails.length>0).length;
+        addLog(`✅ Email enrichment done — ${withEmail}/${collected.length} businesses have verified emails`);
+        addLog(`📧 Total decision-maker emails found: ${collected.reduce((a,b)=>a+b.emails.length,0)}`);
       }
-    }catch(err){
-      addLog(`❌ ${label} failed: ${err.message}`);
-    }
-    prog+=progStep;
-    setProgress(Math.round(prog));
-    await sleep(200);
+    }catch(err){ addLog(`⚠️ Email enrichment failed: ${err.message}`); }
   }
 
-  // Dedup & trim
+  // Score all leads
+  collected.forEach(b=>{ b.score=calcScore(b); });
+
+  // Dedup
   const seen=new Set();
-  const unique=collected.filter(l=>{const k=l.name+l.website;if(seen.has(k))return false;seen.add(k);return true;}).slice(0,limit);
-  addLog(`📊 Deduplication: ${collected.length} raw → ${unique.length} unique`);
-  setProgress(75,'Enriching leads...');
-  await sleep(400);
+  const unique=collected.filter(l=>{const k=(l.name+l.website).toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,limit);
+  addLog(`📊 Final: ${unique.length} unique businesses ready`);
+  setProgress(80,'Pushing to Google Sheets...');
 
-  // Hunter enrichment
-  // Always attempt email enrichment if Hunter key provided
-  if(hunterKey && !isDemo){
-    addLog(`📧 Enriching emails via Hunter.io for ${unique.length} leads...`);
-    setProgress(78,'Enriching emails...');
-    try{
-      const d = await callBackend('/enrich/emails',{leads: unique, hunterApiKey: hunterKey});
-      if(d.leads){
-        d.leads.forEach((l,i)=>{ unique[i]=l; });
-        const found = unique.filter(l=>l.email).length;
-        addLog(`✅ Email enrichment done — ${found}/${unique.length} leads have valid emails`);
-      }
-    }catch(err){
-      addLog(`⚠️ Email enrichment failed: ${err.message}`);
-    }
-  } else if(!hunterKey && !isDemo){
-    addLog(`⚠️ No Hunter.io key — emails may be missing. Add key in config to enrich emails.`);
-  }
-
-  setProgress(90,'Pushing to Google Sheets...');
-  addLog(`📡 Pushing ${unique.length} leads to Google Sheets...`);
-  await sleep(600);
-
+  // STEP 4: Push to Sheets
+  addLog('─────────────────────────────────');
+  addLog(`📡 STEP 4: Pushing ${unique.length} leads to Google Sheets...`);
+  await sleep(500);
   let pushed=false;
   try{
-    if(isDemo){await sleep(700);pushed=true;}
+    if(isDemo){ await sleep(700); pushed=true; }
     else{
-      const d = await callBackend('/push/sheets',{webhookUrl: webhook, leads: unique});
-      pushed = d.success;
-      if(pushed) addLog(`📧 Leads with verified emails: ${d.withEmail||0}/${unique.length}`);
+      const d=await callBackend('/push/sheets',{webhookUrl:webhook,leads:unique});
+      pushed=d.success;
+      if(pushed) addLog(`📧 Leads with emails: ${d.withEmail||0}/${unique.length}`);
     }
     if(pushed){
-      addLog(`✅ ${unique.length} leads pushed to Google Sheets!`);
+      addLog(`✅ All ${unique.length} leads pushed to Google Sheets!`);
       document.getElementById('syncBadge').classList.add('show');
       document.getElementById('syncCount').textContent=unique.length;
-    }else{
-      addLog('❌ Google Sheets push failed — check your webhook URL');
-    }
-  }catch(err){addLog(`❌ Sheets error: ${err.message}`);}
+    }else{ addLog('❌ Google Sheets push failed — check webhook URL'); }
+  }catch(err){ addLog(`❌ Sheets error: ${err.message}`); }
 
-  setProgress(100,'Done!');
+  setProgress(100,'Done! ✅');
   allLeads=unique;
 
-  // Save history
-  const histEntry={
-    date: new Date().toLocaleString(),
-    count: unique.length,
-    keyword,
-    location: location||'Global',
-    platforms: [...new Set(unique.map(l=>l.platform))].join(', '),
-    avgScore: unique.length?(unique.reduce((a,b)=>a+b.score,0)/unique.length).toFixed(1):'0',
-    mode: isDemo?'Demo':'Live'
-  };
+  const histEntry={date:new Date().toLocaleString(),count:unique.length,keyword,location:location||'Global',platforms:'Google Maps + '+activeSocials.join(', '),avgScore:(unique.reduce((a,b)=>a+b.score,0)/(unique.length||1)).toFixed(1),emailCount:unique.reduce((a,b)=>a+b.emails.length,0),mode:isDemo?'Demo':'Live'};
   runHistory.unshift(histEntry);
   if(runHistory.length>20) runHistory.pop();
   localStorage.setItem('lf_history',JSON.stringify(runHistory));
   renderHistory();
-
   renderResults(unique);
+
   running=false;
   document.getElementById('runBtn').disabled=false;
   document.getElementById('runBtn').innerHTML='⚡ Run';
@@ -555,9 +547,7 @@ async function generateLeads(){
 
 function resetAll(){
   if(!confirm('Reset all leads and clear current results?')) return;
-  allLeads=[];
-  activePlatformFilter='All';
-  clearLog();
+  allLeads=[]; activePlatformFilter='All'; clearLog();
   document.getElementById('emptyResults').style.display='block';
   document.getElementById('resultsContent').style.display='none';
   document.getElementById('tab-results').textContent='📊 Leads';
@@ -565,7 +555,6 @@ function resetAll(){
   document.getElementById('progressWrap').classList.remove('show');
   document.getElementById('resetBtn').style.display='none';
   setProgress(0,'');
-  // switch to config
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-config').classList.add('active');
@@ -576,17 +565,16 @@ function renderResults(leads){
   if(!leads.length){document.getElementById('emptyResults').style.display='block';document.getElementById('resultsContent').style.display='none';return;}
   document.getElementById('emptyResults').style.display='none';
   document.getElementById('resultsContent').style.display='block';
+  const totalEmails=leads.reduce((a,b)=>a+b.emails.length,0);
   const avg=(leads.reduce((a,b)=>a+b.score,0)/leads.length).toFixed(1);
-  const platforms=[...new Set(leads.map(l=>l.platform))].length;
   document.getElementById('statsGrid').innerHTML=[
     {icon:'👥',value:leads.length,label:'Total Leads',color:'#6366f1'},
+    {icon:'📧',value:totalEmails,label:'Verified Emails',color:'#10b981'},
     {icon:'⭐',value:avg+'/10',label:'Avg Score',color:'#f59e0b'},
-    {icon:'🔗',value:platforms,label:'Platforms',color:'#10b981'},
     {icon:'📄',value:'Synced ✓',label:'Google Sheets',color:'#10b981'},
   ].map(s=>`<div class="stat-card"><div class="stat-icon">${s.icon}</div><div class="stat-value" style="color:${s.color}">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('');
   const pf=document.getElementById('platformFilters');
-  const allP=['All',...new Set(leads.map(l=>l.platform))];
-  pf.innerHTML=allP.map(p=>`<button class="filter-btn ${p==='All'?'active':''}" onclick="setFilter('${p}',this)">${p}</button>`).join('');
+  pf.innerHTML=['All','Has Email','No Email'].map(p=>`<button class="filter-btn ${p==='All'?'active':''}" onclick="setFilter('${p}',this)">${p}</button>`).join('');
   renderTable();
 }
 
@@ -599,21 +587,27 @@ function setFilter(p,btn){
 
 function renderTable(){
   const sort=document.getElementById('sortSelect').value;
-  let leads=[...allLeads].filter(l=>activePlatformFilter==='All'||l.platform===activePlatformFilter);
+  let leads=[...allLeads];
+  if(activePlatformFilter==='Has Email') leads=leads.filter(l=>l.emails.length>0);
+  if(activePlatformFilter==='No Email') leads=leads.filter(l=>l.emails.length===0);
   if(sort==='score') leads.sort((a,b)=>b.score-a.score);
   else if(sort==='name') leads.sort((a,b)=>a.name.localeCompare(b.name));
-  else if(sort==='platform') leads.sort((a,b)=>a.platform.localeCompare(b.platform));
-  const pClass={'Google Maps':'p-google','LinkedIn':'p-linkedin','Instagram':'p-instagram','Facebook':'p-facebook','Hunter.io':'p-hunter'};
+  else if(sort==='emails') leads.sort((a,b)=>b.emails.length-a.emails.length);
   const sc=s=>s>=9?'score-high':s>=7?'score-mid':'score-low';
   document.getElementById('tableBody').innerHTML=leads.map((l,i)=>`
     <tr>
       <td class="td-empty">${i+1}</td>
-      <td class="td-name">${l.name}</td>
+      <td class="td-name">${l.name}<br/><span style="font-size:11px;color:var(--gray-400);font-weight:400">${l.location||''}</span></td>
       <td>${l.website?`<a class="td-link" href="https://${l.website}" target="_blank">${l.website}</a>`:'<span class="td-empty">—</span>'}</td>
-      <td>${l.email||'<span class="td-empty">—</span>'}</td>
+      <td>${l.emails.length?l.emails.map(e=>`<span class="email-chip">${e}</span>`).join(''):'<span class="td-empty">—</span>'}</td>
       <td>${l.phone||'<span class="td-empty">—</span>'}</td>
       <td>${l.location||'<span class="td-empty">—</span>'}</td>
-      <td><span class="platform-badge ${pClass[l.platform]||''}">${l.platform}</span></td>
+      <td style="white-space:nowrap">
+        ${l.linkedinUrl?`<a class="td-link" href="${l.linkedinUrl}" target="_blank">💼</a> `:''}
+        ${l.instagramUrl?`<a class="td-link" href="${l.instagramUrl}" target="_blank">📸</a> `:''}
+        ${l.facebookUrl?`<a class="td-link" href="${l.facebookUrl}" target="_blank">👍</a>`:''}
+        ${!l.linkedinUrl&&!l.instagramUrl&&!l.facebookUrl?'<span class="td-empty">—</span>':''}
+      </td>
       <td><span class="score-badge ${sc(l.score)}">${l.score}/10</span></td>
     </tr>`).join('');
 }
@@ -628,12 +622,9 @@ function renderHistory(){
     <div class="history-item">
       <div>
         <div style="font-weight:700;font-size:14px;color:var(--gray-800)">Run #${runHistory.length-i} — "${r.keyword}" · ${r.location}</div>
-        <div class="history-meta">${r.date} · ${r.platforms} · Avg score: ${r.avgScore}/10 · <span style="color:${r.mode==='Demo'?'#f59e0b':'#10b981'};font-weight:600">${r.mode}</span></div>
+        <div class="history-meta">${r.date} · ${r.platforms} · Avg: ${r.avgScore}/10 · 📧 ${r.emailCount||0} emails · <span style="color:${r.mode==='Demo'?'#f59e0b':'#10b981'};font-weight:600">${r.mode}</span></div>
       </div>
-      <div style="text-align:right">
-        <div class="history-count">${r.count}</div>
-        <div style="font-size:11px;color:var(--gray-400)">leads</div>
-      </div>
+      <div style="text-align:right"><div class="history-count">${r.count}</div><div style="font-size:11px;color:var(--gray-400)">leads</div></div>
     </div>`).join('')}</div>`;
 }
 </script>
